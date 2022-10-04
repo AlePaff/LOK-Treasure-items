@@ -1,4 +1,15 @@
 
+
+function loadImage(path, width, height, target, tooltip) {
+   $('<img src="'+ path +'"' + 'title="' + tooltip + '">').on('load', function() {
+     $(this).width(width).height(height).appendTo(target);
+   });
+}
+
+// loadImage("/sprites/icon_10502015.png", 80, 80, "#test_img");
+
+
+
 leer_json();
 async function leer_json(){
    const response = await fetch("data.json");
@@ -6,37 +17,55 @@ async function leer_json(){
 
    console.log("ahora mismo hay "+ datos.master.length + " tesoros");
 
+   var container = document.getElementById("contenedor");
+
    tesoros_l = [];
    for(let i = 0; i < datos.master.length; i++){
-      dict = {
-         nombre: datos.master[i].name,
-         code_master: datos.master[i].code,
-         index_item: datos.item.findIndex(x => x.master == datos.master[i].code),
-         index_master: i,
-         index_medal_shop: datos.medal_shop.findIndex(x => x.name == datos.master[i].name),
-         index_gain_route: datos.gain_route.findIndex(x => x.name == datos.master[i].name),
-      }
-      tesoros_l.push(dict);
+      nombre = datos.master[i].name;
+      code_master = datos.master[i].code;
+      index_item = datos.item.findIndex(x => x.master == datos.master[i].code);
+      index_master = i;
+      index_medal_shop = datos.medal_shop.findIndex(x => x.name == datos.master[i].name);
+      index_gain_route = datos.gain_route.findIndex(x => x.name == datos.master[i].name);
    
-      // console.log(dict.nombre, dict.index_item, dict.index_master, dict.index_medal_shop, dict.index_gain_route);
-   }
+      console.log(nombre, index_item, index_master, index_medal_shop, index_gain_route);
+      // if (index_item != -1)
 
-   //cargar y mostrar en pantalla la imagen en "src=/sprites/icon_10502015.png" usando jquery sin usar html
-   // $("#imagen").attr("src", "/sprites/icon_10502015.png");
+      // create the elems needed
+      var element = document.createElement("div");
+      element.className = "element-item";
+      element.className += " " + "metalloid";
+      $(element).attr("data-category", "actinoid");
 
+      loadImage("/sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, datos.master[i].name);
+      
+      var grade = document.createElement("div");
+      grade.className = "number";
+      grade.innerHTML = datos.item[index_item].grade;
+      element.appendChild(grade);
+      
+      var name = document.createElement("h2");
+      name.className = "name";
+      name.innerHTML = datos.master[i].name;
+      element.appendChild(name);
 
-   
+       var weight = document.createElement("p");
+       weight.className = "weight";
+       weight.innerHTML = 33;
+      element.appendChild(weight);
+
+      var symbol = document.createElement("p");
+      symbol.className = "symbol";
+      symbol.innerHTML = index_item;
+      element.appendChild(symbol);
+
+       // append player to container
+       container.appendChild(element);
+
+   }   
 }
 
 
-function loadImage(path, width, height, target) {
-   $('<img src="'+ path +'">').on('load', function() {
-     $(this).width(width).height(height).appendTo(target);
-   });
-}
-
-loadImage("/sprites/icon_10502015.png", 80, 80, "#test_img");
-loadImage("/sprites/icon_10504012.png", 80, 80, "#test_img");
 
 
 
@@ -44,7 +73,8 @@ loadImage("/sprites/icon_10504012.png", 80, 80, "#test_img");
 $(document).ready(function() {
 
   
-   
+
+
    // init Isotope
    var $grid = $('.grid').isotope({
       itemSelector: '.element-item',
