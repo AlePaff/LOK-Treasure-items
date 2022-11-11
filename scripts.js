@@ -26,14 +26,115 @@ function loadImage(path, width, height, target, tooltip) {
 
 let json = {};
 
-$.holdReady(true);
+// external js: isotope.pkgd.js
+$(document).ready(function() {      //se fija cuando el documento está listo para ejecutar el código
+// $() es un selector de elementos de jquery, es como document.getElementById() pero más potente
+// luego de ready se ejecuta una función anónima (una función que no tiene nombre, se ejecuta cuando se llama)
+
+function isotopeCode(){
+   console.log("ready!");
+
+   // init Isotope
+   var $grid = $('.grid').isotope({
+      itemSelector: '.element-item',
+      layoutMode: 'fitRows',
+      getSortData: {
+      name: function( itemElem ) {     //disable case sensitive
+         var name = $( itemElem ).find('.name').text();
+         return name.toLowerCase();
+      },
+      grade: '.grade parseInt',
+      symbol: '.symbol',
+      category: '[data-category]',
+      weight: function( itemElem ) {
+         var weight = $( itemElem ).find('.weight').text();
+         return parseFloat( weight.replace( /[\(\)]/g, '') );
+      }
+      }
+   });
+   
+   // filter functions
+   var filterFns = {
+      // show if grade is greater than 50
+      numberGreaterThan50: function() {
+      var grade = $(this).find('.grade').text();
+      return parseInt( grade, 10 ) > 50;
+      },
+      // show if name ends with -ium
+      ium: function() {
+      var name = $(this).find('.name').text();
+      return name.match( /ium$/ );
+      },
+
+      // gradeLegendary: function() {
+      //    var grade = $(this).find('.grade').text();
+      //    return parseInt(grade, 10) == 4;
+      // },
+      gradeEpic: function() {
+         var grade = $(this).find('.grade').text();
+         return parseInt(grade, 10) == 3;
+      },
+
+      legendary: function() {
+         var grade = $(this).find('.grade').text();
+         return parseInt(grade, 10) == 4;
+      }
+   };   
+   // bind filter button click
+   $('#filters').on( 'click', 'button', function() {
+      var filterValue = $( this ).attr('data-filter');
+      // use filterFn if matches value
+      filterValue = filterFns[ filterValue ] || filterValue;
+      $grid.isotope({ filter: filterValue });
+   });
+   
+
+   // bind filter on select change
+   $('.filters-select').on( 'change', function() {
+      // get filter value from option value
+      var filterValue = this.value;
+      // use filterFn if matches value
+      filterValue = filterFns[ filterValue ] || filterValue;
+      $grid.isotope({ filter: filterValue });
+   });
 
 
 
+   // bind sort button click
+   $('#sorts').on( 'click', 'button', function() {
+      var sortByValue = $(this).attr('data-sort-by');
+      $grid.isotope({
+         sortBy: sortByValue,
+         sortAscending: {
+            name: true,
+            grade: false
+         }
+      });
+   });
+   
+   // change is-checked class on buttons
+   $('.button-group').each( function( i, buttonGroup ) {
+      var $buttonGroup = $( buttonGroup );
+      $buttonGroup.on( 'click', 'button', function() {
+      $buttonGroup.find('.is-checked').removeClass('is-checked');
+      $( this ).addClass('is-checked');
+      });
+   });
+   
+}
+
+
+
+
+
+
+
+
+
+// === Lectura del json y creación de los elementos ===
 $.getJSON("data.json", function(datos){
    json = datos;
 
-   console.log(json);
 // console.log("ahora mismo hay "+ datos.master.length + " tesoros");
 
 var container = document.getElementById("contenedor");
@@ -58,15 +159,18 @@ for(let i = 0; i < datos.master.length; i++){
 
    loadImage("/sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, datos.master[i].name);
    
+   //grado (normal, magico, epico, legendario)
    var grade = document.createElement("div");
-   grade.className = "number";
+   grade.className = "grade";
    grade.innerHTML = datos.item[index_item].grade;
    element.appendChild(grade);
    
+   //nombre del tesoro
    var name = document.createElement("h2");
    name.className = "name";
    name.innerHTML = datos.master[i].name;
    element.appendChild(name);
+
 
     var weight = document.createElement("p");
     weight.className = "weight";
@@ -78,75 +182,11 @@ for(let i = 0; i < datos.master.length; i++){
    symbol.innerHTML = index_item;
    element.appendChild(symbol);
 
-    // append player to container
+    // append data to container
     container.appendChild(element);
 
 }
-$.holdReady(false);
+
+// una vez cargados los datos del json, se ejecuta el código de isotope
+}).then(() => isotopeCode());
 });
-
-
-// external js: isotope.pkgd.js
-// $(document).ready(function() {      //se fija cuando el documento está listo para ejecutar el código
-// $() es un selector de elementos de jquery, es como document.getElementById() pero más potente
-// luego de ready se ejecuta una función anónima (una función que no tiene nombre, se ejecuta cuando se llama)
-
-// $(function(){
-
-// function isotopeCode(){
-   console.log("ready!");
-
-   // init Isotope
-   var $grid = $('.grid').isotope({
-      itemSelector: '.element-item',
-      layoutMode: 'fitRows',
-      getSortData: {
-      name: '.name',
-      symbol: '.symbol',
-      number: '.number parseInt',
-      category: '[data-category]',
-      weight: function( itemElem ) {
-         var weight = $( itemElem ).find('.weight').text();
-         return parseFloat( weight.replace( /[\(\)]/g, '') );
-      }
-      }
-   });
-   
-   // filter functions
-   var filterFns = {
-      // show if number is greater than 50
-      numberGreaterThan50: function() {
-      var number = $(this).find('.number').text();
-      return parseInt( number, 10 ) > 50;
-      },
-      // show if name ends with -ium
-      ium: function() {
-      var name = $(this).find('.name').text();
-      return name.match( /ium$/ );
-      }
-   };
-   
-   // bind filter button click
-   $('#filters').on( 'click', 'button', function() {
-      var filterValue = $( this ).attr('data-filter');
-      // use filterFn if matches value
-      filterValue = filterFns[ filterValue ] || filterValue;
-      $grid.isotope({ filter: filterValue });
-   });
-   
-   // bind sort button click
-   $('#sorts').on( 'click', 'button', function() {
-      var sortByValue = $(this).attr('data-sort-by');
-      $grid.isotope({ sortBy: sortByValue });
-   });
-   
-   // change is-checked class on buttons
-   $('.button-group').each( function( i, buttonGroup ) {
-      var $buttonGroup = $( buttonGroup );
-      $buttonGroup.on( 'click', 'button', function() {
-      $buttonGroup.find('.is-checked').removeClass('is-checked');
-      $( this ).addClass('is-checked');
-      });
-   });
-
-

@@ -18,14 +18,12 @@
 
 
 <body>
-<h4>Items</h4>
 
 
-
-
-<h1>Isotope - filtering &amp; sorting</h1>
-<h2>Filter</h2>
-<div id="filters" class="button-group">  <button class="button is-checked" data-filter="*">show all</button>
+<h2>Lok treasure items, using Isotope</h2>
+<h2>Filter (show only)</h2>
+<div id="filters" class="button-group">
+  <button class="button is-checked" data-filter="*">show all</button>
   <button class="button" data-filter=".metal">metal</button>
   <button class="button" data-filter=".transition">transition</button>
   <button class="button" data-filter=".alkali, .alkaline-earth">alkali and alkaline-earth</button>
@@ -33,32 +31,43 @@
   <button class="button" data-filter=".metal:not(.transition)">metal but not transition</button>
   <button class="button" data-filter="numberGreaterThan50">number > 50</button>
   <button class="button" data-filter="ium">name ends with &ndash;ium</button>
+
+  <button class="button" data-filter="gradeLegendary">grade legendary</button>
 </div>
 
-<h2>Sort</h2>
+<h2>filter by grade</h2>
+<select id="filter-grade" class="filters-select">
+  <option data-filter="*">show all</option>
+  <option data-filter="gradeLegendary">legendary</option>
+  <option data-filter="gradeEpic">epic</option>
+  <option data-filter="gradeMagic">magic</option>
+  <option data-filter="gradeNormal">normal</option>
+</select>
+
+<h2>Sort by category</h2>
 <div id="sorts" class="button-group">  <button class="button is-checked" data-sort-by="original-order">original order</button>
   <button class="button" data-sort-by="name">name</button>
   <button class="button" data-sort-by="symbol">symbol</button>
-  <button class="button" data-sort-by="number">number</button>
+  <button class="button" data-sort-by="grade">grade</button>
   <button class="button" data-sort-by="weight">weight</button>
   <button class="button" data-sort-by="category">category</button>
 </div>
 
 
 <div class="grid" id="contenedor">
-<!-- 
   <div class="element-item transition metal " data-category="transition">
     <h3 class="name">Mercury</h3>
     <p class="symbol">Hg</p>
-    <p class="number">80</p>
+    <p class="grade">3</p>
     <p class="weight">200.59</p>
   </div>
   <div class="element-item metalloid " data-category="metalloid">
     <h3 class="name">Tellurium</h3>
     <p class="symbol">Te</p>
-    <p class="number">52</p>
+    <p class="grade">5</p>
     <p class="weight">127.6</p>
   </div>
+  <!--  
   <div class="element-item post-transition metal " data-category="post-transition">
     <h3 class="name">Bismuth</h3>
     <p class="symbol">Bi</p>
@@ -154,7 +163,7 @@
     <p class="symbol">Pu</p>
     <p class="number">94</p>
     <p class="weight">(244)</p>
-  </div> -->
+  </div>  -->
 </div>
 
 
