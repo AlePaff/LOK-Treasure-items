@@ -35,7 +35,6 @@ function grade_to_string(grade){
 // });
 
 
-let json = {};
 
 // external js: isotope.pkgd.js
 $(document).ready(function() {      //se fija cuando el documento está listo para ejecutar el código
@@ -151,14 +150,14 @@ $('#filters').on( 'click', '.button', function() {    //cuando se hace click en 
 }
 
 
-
-
-
-
-
-
+let json = {};
+var ability_translation = {};
 
 // === Lectura del json y creación de los elementos ===
+$.getJSON("ability_translation.json", function(traducciones) {
+   ability_translation = traducciones;
+});
+
 $.getJSON("data.json", function(datos){
    json = datos;
 
@@ -176,7 +175,68 @@ for(let i = 0; i < datos.master.length; i++){
    index_gain_route = datos.gain_route.findIndex(x => x.name == datos.master[i].name);
 
    // console.log(nombre, index_item, index_master, index_medal_shop, index_gain_route);
-   // if (index_item != -1)
+
+   //traducir codigo de habilidad comun a string
+
+   // "ability_2": 22044,
+   // "ability_type_2": 3,
+   // "ability_value_2": 1,
+   // "ability_3": 22045,
+   // "ability_type_3": 3,
+   // "ability_value_3": 1,
+   // "ability_4": 0,
+   // "ability_type_4": 0,
+   // "ability_value_4": 0,
+   // "ability_5": 0,
+   // "ability_type_5": 0,
+
+   
+   var language = "English";
+
+
+   // treasure_boost = {
+   //    ab1_name : "cav speed"
+   //    ab1_lvl : 1
+   //    lvl_value_5: 0.08 
+   // }
+
+   //habilidades master
+   for(let j = 0; j < 5; j++){
+      hab_number = datos.master[i]["ability_"+(j+1)];
+      if(hab_number > 10000){      //si la habilidad es item especial (ej. Instant harvest 1)
+         hab_j_lvl = datos.master[i]["ability_value_"+(j+1)];
+         var index_ab_special = datos.askill.findIndex(x => x.code == hab_number && x.level == hab_j_lvl);
+         var name_special = datos.askill[index_ab_special].name;
+         // console.log(name_special)
+      }
+      else if(hab_number != 0){
+         var name_hab = "ability_" + hab_number;
+         // var hab_j_lvl_c = datos.master[i]["ability_value_"+(j+1)];
+         var hab_index_lang = ability_translation.findIndex(x => x.Description == name_hab);
+         var hab_name = ability_translation[hab_index_lang][language];
+         // console.log(hab_name);
+      }
+   }
+
+   //    var hab_code_1 = datos.item[index_item].ability_1;
+   // var hab_code_2 = datos.item[index_item].ability_2;
+   // var hab_code_3 = datos.item[index_item].ability_3;
+   // var hab_code_4 = datos.item[index_item].ability_4;
+   // var hab_code_5 = datos.item[index_item].ability_5;
+      
+
+
+   //get english name
+   // var hab_index_1 = datos.pskill.findIndex(x => x.code == hab_code_1);
+   // var name1 = "ability_" + datos.pskill[hab_index_1].ability;
+   // var hab_index_1_en = ability_translation.findIndex(x => x.Description == name1);
+   // var hab_name_1 = ability_translation[hab_index_1_en][language];
+   
+   
+   
+
+
+
 
    // create the elems needed
    var element = document.createElement("div");
