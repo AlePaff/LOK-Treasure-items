@@ -52,8 +52,15 @@ function isotopeCode(){
       // },
       // show if name ends with -ium
       ium: function() {
-      var name = $(this).find('.name').text();
-      return name.match( /ium$/ );
+         var name = $(this).find('.name').text();    //selecciona el elemento con clase name (tambien en todos los hijos anidados, ver find()) y obtiene su texto
+         return name.match( /ium$/ );     //$ es el final de la cadena
+      },
+      
+      speedSearch: function() {
+         //devolver el elemento que tenga la palabra "speed" en su clase hijo
+         var name = $(this).find('.speed.research').text();    //busca las que tengan speed Y research (para otros ifs ver https://isotope.metafizzy.co/filtering.html)
+         // console.log(name);
+         return name;
       }
 
 
@@ -70,6 +77,7 @@ function isotopeCode(){
   var $grid = $('.grid').isotope({     //selecciona el elemento con clase grid y le aplica el plugin isotope
    itemSelector: '.element-item',      //selecciona los elementos con clase element-item
    layoutMode: 'fitRows',        //ordena en filas
+   //sorts
    getSortData: {
    name: function( itemElem ) {     //desabilita case sensitive
       var name = $( itemElem ).find('.name').text();
@@ -83,6 +91,7 @@ function isotopeCode(){
       return parseFloat( weight.replace( /[\(\)]/g, '') );
    }
    },
+   // filtros
    filter: function() {      
     var isMatched = true;
     var $this = $(this);      
@@ -109,7 +118,7 @@ function isotopeCode(){
 
 $('#filters').on( 'click', '.button', function() {    //cuando se hace click en un elemento con clase button dentro de un elemento con id filters
    console.log("click");
-   var $this = $(this);
+   var $this = $(this);    //selecciona el elemento que se clickeó
    // get group key
    var $buttonGroup = $this.parents('.button-group');    //selecciona el elemento padre con clase button-group
    var filterGroup = $buttonGroup.attr('data-filter-group');      //selecciona el atributo data-filter-group del elemento padre
@@ -118,7 +127,8 @@ $('#filters').on( 'click', '.button', function() {    //cuando se hace click en 
    // arrange, and use filter fn
    $grid.isotope();     //aplica el filtro
  });
-  
+
+
   
 
    // ========= Sorting =========

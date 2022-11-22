@@ -44,11 +44,32 @@
   <button class="button" data-filter=".magic">magic</button>
   <button class="button" data-filter=".normal">normal</button>
 </div>
+
+
+
+<h2>resources</h2>
+<div class="button-group" data-filter-group="resources">
+  <button class="button is-checked" data-filter="*">any</button>
+  <button class="button" data-filter=".gold">gold</button>
+  <button class="button" data-filter=".food">food</button>
+  <button class="button" data-filter=".lumber">lumber</button>
+  <button class="button" data-filter=".stone">stone</button>  
+</div>
+<div class="button-group" data-filter-group="asdf">
+  <button class="button is-checked" data-filter="*">any</button>
+  <button class="button" data-filter=".reserves">reserves</button>
+  <button class="button" data-filter=".capability">capability</button>
+  <button class="button" data-filter=".protection">protection</button>
+  <button class="button" data-filter=".gathering speed">gathering speed</button>  
+  <button class="button" data-filter="speedSearch">speed</button>  
 </div>
 
 
+
+
 <h2>Sort by category</h2>
-<div id="sorts" class="button-group">  <button class="button is-checked" data-sort-by="original-order">original order</button>
+<div id="sorts" class="button-group">
+  <button class="button is-checked" data-sort-by="original-order">original order</button>
   <button class="button" data-sort-by="name">name</button>
   <button class="button" data-sort-by="symbol">symbol</button>
   <button class="button" data-sort-by="grade">grade</button>
@@ -58,7 +79,7 @@
 
 
 <div class="grid" id="contenedor">
-  <div class="element-item transition metal " data-category="transition">
+  <!-- <div class="element-item transition metal " data-category="transition">
     <h3 class="name">Mercury</h3>
     <p class="symbol">Hg</p>
     <p class="grade">3</p>
@@ -69,18 +90,44 @@
     <p class="symbol">Te</p>
     <p class="grade">5</p>
     <p class="weight">127.6</p>
-  </div>
-  <div class="element-item normal cavalry_speed cavalry_load cavalry_attack cavalry_hp troops_speed cavalry_training_rate">
+  </div> -->
+  <div class="element-item normal boost">
     <h3 class="name">Test</h3>
     <p class="grade">1</p>
     <div class="cavalry_speed">0.08</div>   <!-- Solo pongo el maximo nivel -->
     <div class="cavalry_load">0.1</div>
     <div class="cavalry_attack">0.08</div>
     <div class="cavalry_hp">0.1</div>
-    <div class="troops_speed">0.07</div>
+    <div class="troops speed">0.07</div>
     <div class="cavalry_training_rate">0.05</div>
   </div>
-
+  <div class="element-item epic boost buff misc">
+    <h3 class="name">orb of portal</h3>
+    <p class="grade">6</p>
+    <div class="cavalry speed">0.15</div>
+    <div class="archery speed">0.1</div>
+    <div class="infrantry speed">0.08</div>
+    <div class="gold gathering speed">0.1</div>
+    <div class="teleport lvl1">1</div>
+    <div class="maximun reiforcement troop size">0.05</div>
+    <div class="research speed">0.05</div>
+    <div class="teleport lvl2">2</div>
+  </div>
+  <div class="element-item legendary">
+    <h3 class="name">crystal flask</h3>
+    <p class="grade">6</p>
+    <div class="food production">0.05</div>
+    <div class="gold production">0.08</div>
+    <div class="food gathering speed">0.08</div>
+    <div class="gold gathering speed">0.08</div>
+    <div class="gold protection capacity">0.08</div>
+    <div class="resource production">0.08</div>
+    <div class="gathering speed">0.15</div>
+    <div class="increase research speed lvl3">0.08</div>
+    <div class="troops load">0.08</div>
+    <div class="research speed">0.15</div>
+    
+  </div>
   
   <!--  
   <div class="element-item post-transition metal " data-category="post-transition">
@@ -180,7 +227,6 @@
     <p class="weight">(244)</p>
   </div>  -->
 </div>
-
 
 
 </body>
