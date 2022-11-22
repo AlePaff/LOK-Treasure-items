@@ -97,11 +97,11 @@ body {
 .element-item .name {
   position: absolute;
 
-  left: 10px;
-  top: 60px;
+  left: 2px;
+  top: 0px;
   text-transform: none;
   letter-spacing: 0;
-  font-size: 12px;
+  font-size: 17px;
   font-weight: normal;
 }
 
@@ -120,11 +120,10 @@ body {
   top: 5px;
 }
 
-.element-item .weight {
+/* ocultar todos los elementos de tipo div dentro de cada item */
+.element-item div {
   position: absolute;
-  left: 10px;
-  top: 76px;
-  font-size: 12px;
+  display: none;
 }
 
 .element-item.alkali          { background: #F00; background: hsl(   0, 100%, 50%); }
