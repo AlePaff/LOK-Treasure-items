@@ -177,76 +177,51 @@ var container = document.getElementById("contenedor");
 
 tesoros_l = [];
 for(let i = 0; i < datos.master.length; i++){
+   //caracteristicas de los items (nombre item, etc)
    nombre = datos.master[i].name;
    code_master = datos.master[i].code;
    index_item = datos.item.findIndex(x => x.master == datos.master[i].code);
    index_master = i;
    index_medal_shop = datos.medal_shop.findIndex(x => x.name == datos.master[i].name);
    index_gain_route = datos.gain_route.findIndex(x => x.name == datos.master[i].name);
-
    // console.log(nombre, index_item, index_master, index_medal_shop, index_gain_route);
-
-   //traducir codigo de habilidad comun a string
-
-   // "ability_2": 22044,
-   // "ability_type_2": 3,
-   // "ability_value_2": 1,
-   // "ability_3": 22045,
-   // "ability_type_3": 3,
-   // "ability_value_3": 1,
-   // "ability_4": 0,
-   // "ability_type_4": 0,
-   // "ability_value_4": 0,
-   // "ability_5": 0,
-   // "ability_type_5": 0,
-
    
    var language = "English";
+   
+   treasure_boost_and_master_bonus = {};
 
-
-   // treasure_boost = {
-   //    ab1_name : "cav speed"
-   //    ab1_lvl : 1
-   //    lvl_value_5: 0.08 
-   // }
+   //habilidades comunes
+   for(let j = 0; j < 5; j++){
+      var hab_number = datos.item[index_item]["ability_"+(j+1)];
+      if(hab_number != 0){
+         var hab_index_pskill = datos.pskill.findIndex(x => x.code == hab_number);
+         var hab_code = datos.pskill[hab_index_pskill].ability;
+         var hab_index_lang = ability_translation.findIndex(x => x.Description == "ability_" + hab_code);
+         var hab_name = ability_translation[hab_index_lang]["English"];
+         var hab_value_max = datos.pskill[hab_index_pskill].level_value_5;
+         treasure_boost_and_master_bonus["treasure_ab"+(j+1)] = [hab_name, hab_value_max];
+      }
+   } 
 
    //habilidades master
    for(let j = 0; j < 5; j++){
       hab_number = datos.master[i]["ability_"+(j+1)];
       if(hab_number > 10000){      //si la habilidad es item especial (ej. Instant harvest 1)
-         hab_j_lvl = datos.master[i]["ability_value_"+(j+1)];
+         hab_j_lvl = datos.master[i]["ability_value_"+(j+1)];     //lvl 1, 2 o 3
          var index_ab_special = datos.askill.findIndex(x => x.code == hab_number && x.level == hab_j_lvl);
-         var name_special = datos.askill[index_ab_special].name;
-         // console.log(name_special)
+         var name_special = datos.askill[index_ab_special].name;     //Instant harvest 1
+         var abilityValue = datos.askill[index_ab_special].ability_value_1;      //1
+         treasure_boost_and_master_bonus["treasure_ab"+(j+6)] = [name_special, abilityValue];
       }
       else if(hab_number != 0){
          var name_hab = "ability_" + hab_number;
-         // var hab_j_lvl_c = datos.master[i]["ability_value_"+(j+1)];
          var hab_index_lang = ability_translation.findIndex(x => x.Description == name_hab);
-         var hab_name = ability_translation[hab_index_lang][language];
-         // console.log(hab_name);
+         var hab_name = ability_translation[hab_index_lang]["English"];
+         var hab_value = datos.master[i]["ability_value_"+(j+1)];         
+         treasure_boost_and_master_bonus["treasure_ab"+(j+6)] = [hab_name, hab_value];
       }
    }
-
-   //    var hab_code_1 = datos.item[index_item].ability_1;
-   // var hab_code_2 = datos.item[index_item].ability_2;
-   // var hab_code_3 = datos.item[index_item].ability_3;
-   // var hab_code_4 = datos.item[index_item].ability_4;
-   // var hab_code_5 = datos.item[index_item].ability_5;
-      
-
-
-   //get english name
-   // var hab_index_1 = datos.pskill.findIndex(x => x.code == hab_code_1);
-   // var name1 = "ability_" + datos.pskill[hab_index_1].ability;
-   // var hab_index_1_en = ability_translation.findIndex(x => x.Description == name1);
-   // var hab_name_1 = ability_translation[hab_index_1_en][language];
-   
-   
-   
-
-
-
+   // console.log(treasure_boost_and_master_bonus["treasure_ab1"][0]);
 
    // create the elems needed
    var element = document.createElement("div");
@@ -268,17 +243,16 @@ for(let i = 0; i < datos.master.length; i++){
    name.innerHTML = datos.master[i].name;
    element.appendChild(name);
 
-
-    var weight = document.createElement("p");
-    weight.className = "weight";
-    weight.innerHTML = 33;
-   element.appendChild(weight);
-
-   var symbol = document.createElement("p");
-   symbol.className = "symbol";
-   symbol.innerHTML = index_item;
-   element.appendChild(symbol);
-
+   //habilidades de los tesoros, comunes y master
+   for(let j = 0; j < 10; j++){
+      var ability = document.createElement("div");
+      if(treasure_boost_and_master_bonus["treasure_ab"+(j+1)] != undefined){
+         ability.className = treasure_boost_and_master_bonus["treasure_ab"+(j+1)][0];
+         ability.innerHTML = treasure_boost_and_master_bonus["treasure_ab"+(j+1)][1];
+         element.appendChild(ability);
+      }
+   }
+   
     // append data to container
     container.appendChild(element);
 
