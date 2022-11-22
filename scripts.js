@@ -223,11 +223,13 @@ for(let i = 0; i < datos.master.length; i++){
    }
    // console.log(treasure_boost_and_master_bonus["treasure_ab1"][0]);
 
-   // create the elems needed
+
+
+
+   // ==== create the elems needed ====
    var element = document.createElement("div");
    element.className = "element-item";  
    element.className += " " + grade_to_string(datos.item[index_item].grade);
-   // $(element).attr("data-category", "actinoid");
 
    loadImage("/sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, datos.master[i].name);
    
