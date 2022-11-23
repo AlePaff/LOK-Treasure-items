@@ -1,12 +1,25 @@
 
 function loadImage(path, width, height, target, tooltip) {
-   $('<img src="'+ path +'"' + 'title="' + tooltip + '">').on('load', function() {
-     $(this).width(width).height(height).appendTo(target);
-   });
+   if(tooltip == "under" | tooltip == "over"){
+      $('<img src="'+ path +'"' + 'class="' + tooltip + '">').on('load', function() {
+         $(this).width(width).height(height).appendTo(target);
+      })}
+   else {
+      $('<img src="'+ path +'"' + 'title="' + tooltip + '">').on('load', function() {
+      $(this).width(width).height(height).appendTo(target);
+      });
+   }
 }
 // ejemplo de uso 
 // loadImage("/sprites/icon_10502015.png", 80, 80, "#test_img");
 
+function loadFrameAndBackground(grade, width, height, target){
+   var grade_string = grade_to_string(grade);
+   var path_frame = "/sprites/item_frame_" + grade_string + ".png";
+   var path_background = "/sprites/item_bg_" + grade_string + ".png";
+   loadImage(path_frame, width, height, target, "over");
+   loadImage(path_background, width, height, target, "under");
+}
 
 function grade_to_string(grade){
    if(grade == 1){
@@ -117,7 +130,7 @@ function isotopeCode(){
 
 
 $('#filters').on( 'click', '.button', function() {    //cuando se hace click en un elemento con clase button dentro de un elemento con id filters
-   console.log("click");
+   // console.log("click");
    var $this = $(this);    //selecciona el elemento que se clickeó
    // get group key
    var $buttonGroup = $this.parents('.button-group');    //selecciona el elemento padre con clase button-group
@@ -160,6 +173,13 @@ $('#filters').on( 'click', '.button', function() {    //cuando se hace click en 
 }
 
 
+
+
+
+
+
+
+// ========= Cargar datos =========
 let json = {};
 var ability_translation = {};
 
@@ -185,9 +205,7 @@ for(let i = 0; i < datos.master.length; i++){
    index_medal_shop = datos.medal_shop.findIndex(x => x.name == datos.master[i].name);
    index_gain_route = datos.gain_route.findIndex(x => x.name == datos.master[i].name);
    // console.log(nombre, index_item, index_master, index_medal_shop, index_gain_route);
-   
-   var language = "English";
-   
+      
    treasure_boost_and_master_bonus = {};
 
    //habilidades comunes
@@ -231,8 +249,11 @@ for(let i = 0; i < datos.master.length; i++){
    element.className = "element-item";  
    element.className += " " + grade_to_string(datos.item[index_item].grade);
 
+   var language = "English";
    loadImage("/sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, datos.master[i].name);
+   loadFrameAndBackground(datos.item[index_item].grade, 100, 100, element);
    
+
    // grado (normal, magico, epico, legendario)
    var grade = document.createElement("div");
    grade.className = "grade";
@@ -240,7 +261,7 @@ for(let i = 0; i < datos.master.length; i++){
    element.appendChild(grade);
    
    //nombre del tesoro
-   var name = document.createElement("h2");
+   var name = document.createElement("div");
    name.className = "name";
    name.innerHTML = datos.master[i].name;
    element.appendChild(name);
