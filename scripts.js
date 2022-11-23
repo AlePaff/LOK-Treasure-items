@@ -128,15 +128,38 @@ function isotopeCode(){
 
 
 
+/* <h2>resources</h2>
+<div class="button-group" data-filter-group="resources">
+  <button class="button is-checked" data-filter="*">any</button>
+  <button class="button" data-filter=".gold">gold</button>
+  <button class="button" data-filter=".food">food</button>
+  <button class="button" data-filter=".lumber">lumber</button>
+  <button class="button" data-filter=".stone">stone</button>  
+</div>
+<div class="button-group" data-filter-group="recursos">
+  <button class="button is-checked" data-filter="*">any</button>
+  <button class="button" data-filter=".reserves">reserves</button>
+  <button class="button" data-filter=".capability">capability</button>
+  <button class="button" data-filter=".protection">protection</button>
+  <button class="button" data-filter=".gathering speed">gathering speed</button>  
+  <button class="button" data-filter="speedSearch">speed</button>  
+</div> */
 
 $('#filters').on( 'click', '.button', function() {    //cuando se hace click en un elemento con clase button dentro de un elemento con id filters
    // console.log("click");
    var $this = $(this);    //selecciona el elemento que se clickeó
    // get group key
    var $buttonGroup = $this.parents('.button-group');    //selecciona el elemento padre con clase button-group
+   
+   if ($buttonGroup.attr("data-filter-group") == "resources") {
+      console.log("recursos");
+   }
+   
    var filterGroup = $buttonGroup.attr('data-filter-group');      //selecciona el atributo data-filter-group del elemento padre
-   // set filter for group
    filters[ filterGroup ] = $this.attr('data-filter');      //selecciona el atributo data-filter del elemento que se clickeó
+   
+
+   // set filter for group
    // arrange, and use filter fn
    $grid.isotope();     //aplica el filtro
  });
@@ -270,7 +293,8 @@ for(let i = 0; i < datos.master.length; i++){
    for(let j = 0; j < 10; j++){
       var ability = document.createElement("div");
       if(treasure_boost_and_master_bonus["treasure_ab"+(j+1)] != undefined){
-         ability.className = treasure_boost_and_master_bonus["treasure_ab"+(j+1)][0];
+         ability.className = treasure_boost_and_master_bonus["treasure_ab"+(j+1)][0].toLowerCase();
+
          ability.innerHTML = treasure_boost_and_master_bonus["treasure_ab"+(j+1)][1];
          element.appendChild(ability);
       }
