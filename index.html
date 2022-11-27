@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="es-AR">
+
 <head>
-	<meta charset="utf-8">
-	<link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg" />
-    
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-    
-    <link rel="stylesheet" href="style.css">
-    <script src="scripts.js"></script>
-    
-    <title>LOK Treasure-Items</title>
+  <meta charset="utf-8">
+  <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg" />
+
+  <!-- para el fondo de los tooltips -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+
+
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+
+  <!-- librería de terceros para los tooltip de boostrap -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <!-- boostrap para los tooltips -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+  <script src="scripts.js"></script>
+
+
+  <title>LOK Treasure-Items</title>
 </head>
 
 
@@ -20,12 +31,12 @@
 <body>
 
 
-<h2>Lok treasure items, using Isotope</h2>
-<div id="filters">
-  <!-- <h2>Filter (show only)</h2> -->
-<!-- <div class="button-group"> -->
-  <!-- <button class="button is-checked" data-filter="*">show all</button> -->
-  <!-- <button class="button" data-filter=".metal">metal</button>
+  <h2>Lok treasure items, using Isotope</h2>
+  <div id="filters">
+    <!-- <h2>Filter (show only)</h2> -->
+    <!-- <div class="button-group"> -->
+    <!-- <button class="button is-checked" data-filter="*">show all</button> -->
+    <!-- <button class="button" data-filter=".metal">metal</button>
   <button class="button" data-filter=".transition">transition</button>
   <button class="button" data-filter=".alkali, .alkaline-earth">alkali and alkaline-earth</button>
   <button class="button" data-filter=":not(.transition)">not transition</button>
@@ -34,121 +45,133 @@
   <button class="button" data-filter="ium">name ends with &ndash;ium</button>
 
   <button class="button" data-filter="gradeLegendary">grade legendary</button> -->
-<!-- </div> -->
+    <!-- </div> -->
 
-<h2>filter by grade</h2>
-<div class="button-group" data-filter-group="grade">
-  <button class="button is-checked" data-filter="*">any</button>
-  <button class="button" data-filter=".legendary">legendary</button>
-  <button class="button" data-filter=".epic">epic</button>
-  <button class="button" data-filter=".magic">magic</button>
-  <button class="button" data-filter=".normal">normal</button>
-</div>
-
-
-<h2>resources</h2>
-<div class="button-group" data-filter-group="resources">
-  <button class="button is-checked" data-filter="*">any</button>
-  <button class="button" data-filter=".gold">gold</button>
-  <button class="button" data-filter=".food">food</button>
-  <button class="button" data-filter=".lumber">lumber</button>
-  <button class="button" data-filter=".stone">stone</button>
-  <button class="button" data-filter=".resource">resource</button>
-</div>
-<div class="button-group" data-filter-group="resources_specific">
-  <button class="button is-checked" data-filter="*">any</button>
-  <button class="button" data-filter=".reserves">reserves</button>
-  <button class="button" data-filter=".storage">storage</button>
-  <button class="button" data-filter=".protection">protection</button>
-  <button class="button" data-filter=".production">production</button>
-  <button class="button" data-filter=".gathering_speed">gathering speed</button>  
-</div>
-
-<h2>battle</h2>
-<div class="button-group" data-filter-group="battle">
-  <button class="button is-checked" data-filter="*">all (cav,inf,arc,troops)</button>
-  <button class="button" data-filter=".cavalry">cavalry</button>
-  <button class="button" data-filter=".infantry">infantry</button>
-  <button class="button" data-filter=".archery">archery</button>
-  <button class="button" data-filter=".troops">troops</button>
-</div>
-<div class="button-group" data-filter-group="battle_specific">
-  <button class="button is-checked" data-filter="*">any</button>
-  <button class="button" data-filter=".speed">speed</button>
-  <button class="button" data-filter=".hp">hp</button>
-  <button class="button" data-filter=".defense">defense</button>
-  <button class="button" data-filter=".load">load</button>
-  <button class="button" data-filter=".training_rate">training rate</button>
-  <button class="button" data-filter=".training_speed">training speed</button>
-  <button class="button" data-filter=".training_cost">training cost</button>
-</div>
+    <h2>filter by grade</h2>
+    <div class="button-group" data-filter-group="grade">
+      <button class="button is-checked" data-filter="*">any</button>
+      <button class="button" data-filter=".legendary">legendary</button>
+      <button class="button" data-filter=".epic">epic</button>
+      <button class="button" data-filter=".magic">magic</button>
+      <button class="button" data-filter=".normal">normal</button>
+    </div>
 
 
+    <h2>resources</h2>
+    <div class="button-group" data-filter-group="resources">
+      <button class="button is-checked" data-filter="*">any</button>
+      <button class="button" data-filter=".gold">gold</button>
+      <button class="button" data-filter=".food">food</button>
+      <button class="button" data-filter=".lumber">lumber</button>
+      <button class="button" data-filter=".stone">stone</button>
+      <button class="button" data-filter=".resource">resource</button>
+    </div>
+    <div class="button-group" data-filter-group="resources_specific">
+      <button class="button is-checked" data-filter="*">any</button>
+      <button class="button" data-filter=".reserves">reserves</button>
+      <button class="button" data-filter=".storage">storage</button>
+      <button class="button" data-filter=".protection">protection</button>
+      <button class="button" data-filter=".production">production</button>
+      <button class="button" data-filter=".gathering_speed">gathering speed</button>
+    </div>
 
-<h2>healing</h2>
-<div class="button-group" data-filter-group="battle">
-  <button class="button is-checked" data-filter="*">any</button>
-  <button class="button" data-filter=".healing_speed">healing speed</button>
-  <button class="button" data-filter=".mortality reduction">mortality reduction</button>
-  <button class="button" data-filter=".defense mortality reduction bonus">defense mortality reduction bonus</button>
-  <button class="button" data-filter=".hospital_capacity">hospital capacity</button>
-</div>
+    <h2>battle</h2>
+    <div class="button-group" data-filter-group="battle">
+      <button class="button is-checked" data-filter="*">all (cav,inf,arc,troops)</button>
+      <button class="button" data-filter=".cavalry">cavalry</button>
+      <button class="button" data-filter=".infantry">infantry</button>
+      <button class="button" data-filter=".archery">archery</button>
+      <button class="button" data-filter=".troops">troops</button>
+    </div>
+    <div class="button-group" data-filter-group="battle_specific">
+      <button class="button is-checked" data-filter="*">any</button>
+      <button class="button" data-filter=".speed">speed</button>
+      <button class="button" data-filter=".hp">hp</button>
+      <button class="button" data-filter=".defense">defense</button>
+      <button class="button" data-filter=".load">load</button>
+      <button class="button" data-filter=".training_rate">training rate</button>
+      <button class="button" data-filter=".training_speed">training speed</button>
+      <button class="button Disabled" data-filter=".training_cost">training cost</button>
+    </div>
 
 
-<h2>various</h2>
-<div class="button-group" data-filter-group="various">
-  <button class="button is-checked" data-filter="*">any</button>
-  <button class="button" data-filter=".construction_speed">construction speed</button>
-  <button class="button" data-filter=".research_speed">research speed</button>
-</div>
+
+    <h2>healing</h2>
+    <div class="button-group" data-filter-group="battle">
+      <button class="button is-checked" data-filter="*">any</button>
+      <button class="button" data-filter=".healing_speed">healing speed</button>
+      <button class="button Disabled" data-filter=".mortality reduction">mortality reduction</button>
+      <button class="button Disabled" data-filter=".defense mortality reduction bonus">defense mortality reduction
+        bonus</button>
+      <button class="button Disabled" data-filter=".hospital_capacity">hospital capacity</button>
+    </div>
 
 
-<h2>Sort by category</h2>
-<div id="sorts" class="button-group">
-  <button class="button is-checked" data-sort-by="original-order">original order</button>
-  <button class="button" data-sort-by="name">name</button>
-  <button class="button" data-sort-by="grade">grade</button>
-</div>
+
+    <h2>various</h2>
+    <div class="button-group" data-filter-group="various">
+      <button class="button is-checked" data-filter="*">any</button>
+      <button class="button" data-filter=".construction_speed">construction speed</button>
+      <button class="button" data-filter=".research_speed">research speed</button>
+    </div>
 
 
-<div class="grid" id="contenedor">
-  <div class="element-item normal boost" id="asd">
-    <h3 class="name">AAAAAAAAAA</h3>
-    <div class="gold protection reserves aljsldksajd laskjdlasjd lasjdlksdj ">0.1</div>
-    <div class="protection reserves">0.1</div>
-    <div class="protection reserves">0.1</div>
-    <div class="protection reserves">0.1</div>
-    <!-- <div class="gold food reserves">0.1</div> -->
-  </div>
-  <div class="element-item epic boost buff ">
-    <h3 class="name">orb of portal</h3>
-    <p class="grade">6</p>
-    <div class="cavalry speed">0.15</div>
-    <div class="archery speed">0.1</div>
-    <div class="infrantry speed">0.08</div>
-    <div class="gold gathering speed">0.1</div>
-    <div class="teleport lvl1">1</div>
-    <div class="maximun reiforcement troop size">0.05</div>
-    <div class="research speed">0.05</div>
-    <div class="teleport lvl2">2</div>
-  </div>
-  <div class="element-item legendary">
-    <h3 class="name">crystal flask</h3>
-    <p class="grade">6</p>
-    <div class="food production">0.05</div>
-    <div class="gold production">0.08</div>
-    <div class="food gathering speed">0.08</div>
-    <div class="gold gathering speed">0.08</div>
-    <div class="gold protection capacity">0.08</div>
-    <div class="resource production">0.08</div>
-    <div class="gathering speed">0.15</div>
-    <div class="increase research speed lvl3">0.08</div>
-    <div class="troops load">0.08</div>
-    <div class="research speed">0.15</div>
-    
-  </div>
-  
-  <!--  
+    <h2>Sort by category</h2>
+    <div id="sorts" class="button-group">
+      <button class="button is-checked" data-sort-by="original-order">original order</button>
+      <button class="button" data-sort-by="name">name</button>
+      <button class="button" data-sort-by="grade">grade</button>
+    </div>
+
+
+    <div class="grid" id="contenedor">
+      <div class="element-item normal boost" id="asd">
+        <h3 class="name">AAAAAAAAAA</h3>
+        <div class="gold protection reserves aljsldksajd laskjdlasjd lasjdlksdj ">0.1</div>
+        <div class="protection reserves">0.1</div>
+        <div class="protection reserves">0.1</div>
+        <div class="protection reserves">0.1</div>
+
+        <!-- <img src="sprites/icon_10501001.png" data-html="true" title="<em>Manure</em> <u>with</u> <b>HTML</b>" -->
+        <img src="sprites/icon_10501001.png" data-html="true" title="
+          <ul>
+            <li>sub A1</li>
+            <li>sub A2</li>
+          </ul><ul>
+            <li>sub A1</li>
+            <li>sub A2</li>
+          </ul>" style="width: 80px; height: 80px;" data-toggle="tooltip">
+
+      </div>
+      <div class="element-item epic boost buff ">
+        <h3 class="name">orb of portal</h3>
+        <p class="grade">6</p>
+        <div class="cavalry speed">0.15</div>
+        <div class="archery speed">0.1</div>
+        <div class="infrantry speed">0.08</div>
+        <div class="gold gathering speed">0.1</div>
+        <div class="teleport lvl1">1</div>
+        <div class="maximun reiforcement troop size">0.05</div>
+        <div class="research speed">0.05</div>
+        <div class="teleport lvl2">2</div>
+      </div>
+      <div class="element-item legendary">
+        <h3 class="name">crystal flask</h3>
+        <p class="grade">6</p>
+        <div class="food production">0.05</div>
+        <div class="gold production">0.08</div>
+        <div class="food gathering speed">0.08</div>
+        <div class="gold gathering speed">0.08</div>
+        <div class="gold protection capacity">0.08</div>
+        <div class="resource production">0.08</div>
+        <div class="gathering speed">0.15</div>
+        <div class="increase research speed lvl3">0.08</div>
+        <div class="troops load">0.08</div>
+        <div class="research speed">0.15</div>
+
+      </div>
+
+      <!--  
   <div class="element-item post-transition metal " data-category="post-transition">
     <h3 class="name">Bismuth</h3>
     <p class="symbol">Bi</p>
@@ -245,8 +268,9 @@
     <p class="number">94</p>
     <p class="weight">(244)</p>
   </div>  -->
-</div>
+    </div>
 
 
 </body>
+
 </html>

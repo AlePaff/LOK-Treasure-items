@@ -1,11 +1,18 @@
 
+$(function () {
+   $('[data-toggle="tooltip"]').tooltip()
+ })
+
 function loadImage(path, width, height, target, tooltip) {
+   //si el tooltip es para el background y frame
    if(tooltip == "under" | tooltip == "over"){
       $('<img src="'+ path +'"' + 'class="' + tooltip + '">').on('load', function() {
          $(this).width(width).height(height).appendTo(target);
       })}
+   //si es para el sprite
    else {
-      $('<img src="'+ path +'"' + 'title="' + tooltip + '">').on('load', function() {
+      // tooltip_string = " ";//armarTooltip(tooltip);
+      $('<img src="'+ path +'"' + ' title="' + tooltip + '" >').on('load', function() {
       $(this).width(width).height(height).appendTo(target);
       });
    }
@@ -20,6 +27,7 @@ function loadFrameAndBackground(grade, width, height, target){
    loadImage(path_frame, width, height, target, "over");
    loadImage(path_background, width, height, target, "under");
 }
+
 
 function grade_to_string(grade){
    if(grade == 1){
@@ -215,8 +223,9 @@ for(let i = 0; i < datos.master.length; i++){
    index_medal_shop = datos.medal_shop.findIndex(x => x.name == datos.master[i].name);
    index_gain_route = datos.gain_route.findIndex(x => x.name == datos.master[i].name);
    // console.log(nombre, index_item, index_master, index_medal_shop, index_gain_route);
-      
+
    treasure_boost_and_master_bonus = {};
+   tooltip_info = {};      //prefiero tener info repetida que codigo desprolijo
 
    //habilidades comunes
    for(let j = 0; j < 5; j++){
@@ -228,7 +237,7 @@ for(let i = 0; i < datos.master.length; i++){
          var hab_name = ability_translation[hab_index_lang]["English"];
          var hab_value_max = datos.pskill[hab_index_pskill].level_value_5;
          treasure_boost_and_master_bonus["treasure_ab"+(j+1)] = [hab_name.toLowerCase(), hab_value_max];
-         //AÑADIR ACA EL TOOLTIP
+         tooltip_info["treasure_ab"+(j+1)] = [hab_name, hab_value_max];
       }
    } 
 
@@ -241,6 +250,7 @@ for(let i = 0; i < datos.master.length; i++){
          var name_special = datos.askill[index_ab_special].name;     //Instant harvest 1
          var abilityValue = datos.askill[index_ab_special].ability_value_1;      //1
          treasure_boost_and_master_bonus["treasure_ab"+(j+6)] = [name_special.toLowerCase(), abilityValue];
+         tooltip_info["treasure_master_ab"+(j+6)] = [name_special, abilityValue];
       }
       else if(hab_number != 0){
          var name_hab = "ability_" + hab_number;
@@ -248,6 +258,7 @@ for(let i = 0; i < datos.master.length; i++){
          var hab_name = ability_translation[hab_index_lang]["English"];
          var hab_value = datos.master[i]["ability_value_"+(j+1)];         
          treasure_boost_and_master_bonus["treasure_ab"+(j+6)] = [hab_name.toLowerCase(), hab_value];
+         tooltip_info["treasure_master_ab"+(j+6)] = [hab_name, hab_value];
       }
    }
 
@@ -271,13 +282,11 @@ for(let i = 0; i < datos.master.length; i++){
          if(trea[0].includes("training cost")){trea[0] = trea[0].replace("training cost", "training_cost");}
          if(trea[0].includes("research speed")){trea[0] = trea[0].replace("research speed", "research_speed");}
          if(trea[0].includes("healing speed")){trea[0] = trea[0].replace("healing speed", "healing_speed");}
-         if(trea[0].includes("hospital capacity")){trea[0] = trea[0].replace("hospital capacity", "hospital_capacity");}
+         // if(trea[0].includes("hospital capacity")){trea[0] = trea[0].replace("hospital capacity", "hospital_capacity");}
          if(trea[0].includes("construction speed")){trea[0] = trea[0].replace("construction speed", "construction_speed");}
       }
    }
    
-
-
 
 
 
@@ -287,10 +296,10 @@ for(let i = 0; i < datos.master.length; i++){
    element.className += " " + grade_to_string(datos.item[index_item].grade);
 
    var language = "English";
+   // loadImage("sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, tooltip_info);
    loadImage("sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, datos.master[i].name);
    loadFrameAndBackground(datos.item[index_item].grade, 100, 100, element);
    
-
    // grado (normal, magico, epico, legendario)
    var grade = document.createElement("div");
    grade.className = "grade";
@@ -319,7 +328,23 @@ for(let i = 0; i < datos.master.length; i++){
 
    }
 
+   
 // una vez cargados los datos del json, se ejecuta el código de isotope
 }).then(() => isotopeCode());
 });
 
+
+
+// function armarTooltip(tooltip_info){
+//    var string_tooltip = "";
+//    for(let k = 0; k < 10; k++){
+//       if(tooltip_info["treasure_ab"+(k+1)] != undefined){
+//          // string_tooltip += tooltip_info["treasure_ab"+(k+1)][0] + ": " + tooltip_info["treasure_ab"+(k+1)][1] + "<br>";
+//          string_tooltip += "<ul><li>sub A1</li><li>sub A2</li></ul>";
+//       }
+//       if(tooltip_info["treasure_master_ab"+(k+1)] != undefined){
+//          string_tooltip += "<ul><li>AAAA</li><li>BBBBBB</li></ul>";
+//       }
+//    }
+//    return string_tooltip;
+// }

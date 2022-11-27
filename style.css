@@ -3,9 +3,13 @@
 
 body {
   font-family: sans-serif;
+  height: 1100px;       /* tamaño fijo */
 }
 
 /* ---- button ---- */
+li{
+  display:inline-block;
+}
 
 .button {
   display: inline-block;
@@ -142,8 +146,15 @@ body {
 
 
 
-
-
+/* hacer botones inabilitados */
+.Disabled{
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
 
 
 
