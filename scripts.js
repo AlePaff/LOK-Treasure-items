@@ -71,7 +71,7 @@ function isotopeCode(){
       
       speedSearch: function() {
          //devolver el elemento que tenga la palabra "speed" en su clase hijo
-         var name = $(this).find('.speed.research').text();    //busca las que tengan speed Y research (para otros ifs ver https://isotope.metafizzy.co/filtering.html)
+         var name = $(this).find('.research').text();    //busca las que tengan speed Y research (para otros ifs ver https://isotope.metafizzy.co/filtering.html)
          // console.log(name);
          return name;
       }
@@ -103,19 +103,36 @@ function isotopeCode(){
       var weight = $( itemElem ).find('.weight').text();
       return parseFloat( weight.replace( /[\(\)]/g, '') );
    }
+   //ordenar tambien por la cantidad de palabras repetidas (aparece gold 5 veces en los filtros entonces esa primero. usar length )
    },
    // filtros
    filter: function() {      
     var isMatched = true;
-    var $this = $(this);      
-   
+    var $this = $(this);   
     for ( var prop in filters ) {
-      var filter = filters[ prop ];
+      var filter = filters[ prop ];       //toma el elemento "prop" del array de filtros
       // use function if it matches
       filter = filterFns[ filter ] || filter;      //si el filtro es una función, se usa la función, sino se usa el filtro
       // test each filter
-      if ( filter ) {
-        isMatched = isMatched && $(this).is( filter );
+      // console.log(filters);
+
+      if ( filter ) {         
+      //se fija que el nombre de la clase del item matchee con el filtro (ej. .gold matchee class:"gold")
+      //si coincide con el filtro actual o uno de los hijos tiene la clase filtro, isMatched es true
+      // isMatched = isMatched && $this.is( filter ) || 
+      //   isMatched = isMatched && $(this).is( filter );      //si el elemento es igual al filtro, se devuelve true, sino false  
+
+        isMatched = isMatched && ($(this).is( filter ) || $this.find(filter).length > 0 );
+      
+      //   console.log($this.find(filter).length);
+        if( filter == "#asd .gold"){
+            // console.log("asd");
+            // console.log($(this).is( filter ));
+        }
+         // console.log($(this).find('.asdfg').text());
+      //   isMatched = isMatched && $(this).find('.research');       //find devuelve 
+        //.is() es un selector de jquery que devuelve true o false
+        //ej de uso: $( "div" ).is( ".foo" );    //si div tiene la clase foo, devuelve true, sino false 
       }
       // break if not matched
       if ( !isMatched ) {
@@ -143,7 +160,20 @@ function isotopeCode(){
   <button class="button" data-filter=".protection">protection</button>
   <button class="button" data-filter=".gathering speed">gathering speed</button>  
   <button class="button" data-filter="speedSearch">speed</button>  
-</div> */
+</div> 
+
+
+<div class="element-item normal boost gold">
+    <h3 class="name">Test</h3>
+    <p class="grade">1</p>
+    <div class="cavalry_speed">0.08</div>   <!-- Solo pongo el maximo nivel -->
+    <div class="cavalry_load">0.1</div>
+    <div class="cavalry_attack">0.08</div>
+    <div class="cavalry_hp">0.1</div>
+    <div class="troops speed">0.07</div>
+    <div class="cavalry_training_rate">0.05</div>
+  </div>
+*/
 
 $('#filters').on( 'click', '.button', function() {    //cuando se hace click en un elemento con clase button dentro de un elemento con id filters
    // console.log("click");
@@ -152,12 +182,12 @@ $('#filters').on( 'click', '.button', function() {    //cuando se hace click en 
    var $buttonGroup = $this.parents('.button-group');    //selecciona el elemento padre con clase button-group
    
    if ($buttonGroup.attr("data-filter-group") == "resources") {
-      console.log("recursos");
+      // console.log("recursos");
    }
    
    var filterGroup = $buttonGroup.attr('data-filter-group');      //selecciona el atributo data-filter-group del elemento padre
-   filters[ filterGroup ] = $this.attr('data-filter');      //selecciona el atributo data-filter del elemento que se clickeó
-   
+   filters[ filterGroup ] = $this.attr('data-filter');      //selecciona el atributo data-filter del elemento que se clickeó y lo guarda en filters
+   //ej. filters = {resources: ".gold", grade: ".legendary"}
 
    // set filter for group
    // arrange, and use filter fn
