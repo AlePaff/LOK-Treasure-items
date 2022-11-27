@@ -21,11 +21,11 @@
 
 
 <h2>Lok treasure items, using Isotope</h2>
-<h2>Filter (show only)</h2>
 <div id="filters">
-<div class="button-group">
-  <button class="button is-checked" data-filter="*">show all</button>
-  <button class="button" data-filter=".metal">metal</button>
+  <!-- <h2>Filter (show only)</h2> -->
+<!-- <div class="button-group"> -->
+  <!-- <button class="button is-checked" data-filter="*">show all</button> -->
+  <!-- <button class="button" data-filter=".metal">metal</button>
   <button class="button" data-filter=".transition">transition</button>
   <button class="button" data-filter=".alkali, .alkaline-earth">alkali and alkaline-earth</button>
   <button class="button" data-filter=":not(.transition)">not transition</button>
@@ -33,8 +33,8 @@
   <button class="button" data-filter="numberGreaterThan50">number > 50</button>
   <button class="button" data-filter="ium">name ends with &ndash;ium</button>
 
-  <button class="button" data-filter="gradeLegendary">grade legendary</button>
-</div>
+  <button class="button" data-filter="gradeLegendary">grade legendary</button> -->
+<!-- </div> -->
 
 <h2>filter by grade</h2>
 <div class="button-group" data-filter-group="grade">
@@ -46,7 +46,6 @@
 </div>
 
 
-
 <h2>resources</h2>
 <div class="button-group" data-filter-group="resources">
   <button class="button is-checked" data-filter="*">any</button>
@@ -56,17 +55,52 @@
   <button class="button" data-filter=".stone">stone</button>
   <button class="button" data-filter=".resource">resource</button>
 </div>
-<div class="button-group" data-filter-group="recursos">
+<div class="button-group" data-filter-group="resources_specific">
   <button class="button is-checked" data-filter="*">any</button>
   <button class="button" data-filter=".reserves">reserves</button>
   <button class="button" data-filter=".storage">storage</button>
   <button class="button" data-filter=".protection">protection</button>
   <button class="button" data-filter=".production">production</button>
-  <button class="button" data-filter=".gathering speed">gathering speed</button>  
-  <button class="button" data-filter="speedSearch">speed</button>  
+  <button class="button" data-filter=".gathering_speed">gathering speed</button>  
+</div>
+
+<h2>battle</h2>
+<div class="button-group" data-filter-group="battle">
+  <button class="button is-checked" data-filter="*">all (cav,inf,arc,troops)</button>
+  <button class="button" data-filter=".cavalry">cavalry</button>
+  <button class="button" data-filter=".infantry">infantry</button>
+  <button class="button" data-filter=".archery">archery</button>
+  <button class="button" data-filter=".troops">troops</button>
+</div>
+<div class="button-group" data-filter-group="battle_specific">
+  <button class="button is-checked" data-filter="*">any</button>
+  <button class="button" data-filter=".speed">speed</button>
+  <button class="button" data-filter=".hp">hp</button>
+  <button class="button" data-filter=".defense">defense</button>
+  <button class="button" data-filter=".load">load</button>
+  <button class="button" data-filter=".training_rate">training rate</button>
+  <button class="button" data-filter=".training_speed">training speed</button>
+  <button class="button" data-filter=".training_cost">training cost</button>
 </div>
 
 
+
+<h2>healing</h2>
+<div class="button-group" data-filter-group="battle">
+  <button class="button is-checked" data-filter="*">any</button>
+  <button class="button" data-filter=".healing_speed">healing speed</button>
+  <button class="button" data-filter=".mortality reduction">mortality reduction</button>
+  <button class="button" data-filter=".defense mortality reduction bonus">defense mortality reduction bonus</button>
+  <button class="button" data-filter=".hospital_capacity">hospital capacity</button>
+</div>
+
+
+<h2>various</h2>
+<div class="button-group" data-filter-group="various">
+  <button class="button is-checked" data-filter="*">any</button>
+  <button class="button" data-filter=".construction_speed">construction speed</button>
+  <button class="button" data-filter=".research_speed">research speed</button>
+</div>
 
 
 <h2>Sort by category</h2>

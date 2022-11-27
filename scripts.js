@@ -119,10 +119,14 @@ function isotopeCode(){
       //   isMatched = isMatched && $(this).is( filter );      //si el elemento es igual al filtro, se devuelve true, sino false  
       isMatched = isMatched && ($(this).is( filter ) || $this.find(filter).length > 0 );     //o bien si alguno de los hijos matchea con el filtro (usando find)
 
-      //si filters tiene como clave "resources" Y "recursos" entonces
+      //si filters tiene como clave "resources" Y "resources_specific" entonces
       //fijate de los hijos, uno que cumpla ambas condiciones de los valores de cada clave
-         if("resources" in filters && "recursos" in filters){
-            var filtros_string = filters["resources"] + filters["recursos"] ;
+         if("resources" in filters && "resources_specific" in filters){
+            var filtros_string = filters["resources"] + filters["resources_specific"] ;
+            isMatched = isMatched && ($this.find(filtros_string).length > 0 );
+         }
+         if("battle" in filters && "battle_specific" in filters){
+            var filtros_string = filters["battle"] + filters["battle_specific"] ;
             isMatched = isMatched && ($this.find(filtros_string).length > 0 );
          }
       }
@@ -223,7 +227,7 @@ for(let i = 0; i < datos.master.length; i++){
          var hab_index_lang = ability_translation.findIndex(x => x.Description == "ability_" + hab_code);
          var hab_name = ability_translation[hab_index_lang]["English"];
          var hab_value_max = datos.pskill[hab_index_pskill].level_value_5;
-         treasure_boost_and_master_bonus["treasure_ab"+(j+1)] = [hab_name, hab_value_max];
+         treasure_boost_and_master_bonus["treasure_ab"+(j+1)] = [hab_name.toLowerCase(), hab_value_max];
       }
    } 
 
@@ -235,23 +239,43 @@ for(let i = 0; i < datos.master.length; i++){
          var index_ab_special = datos.askill.findIndex(x => x.code == hab_number && x.level == hab_j_lvl);
          var name_special = datos.askill[index_ab_special].name;     //Instant harvest 1
          var abilityValue = datos.askill[index_ab_special].ability_value_1;      //1
-         treasure_boost_and_master_bonus["treasure_ab"+(j+6)] = [name_special, abilityValue];
+         treasure_boost_and_master_bonus["treasure_ab"+(j+6)] = [name_special.toLowerCase(), abilityValue];
       }
       else if(hab_number != 0){
          var name_hab = "ability_" + hab_number;
          var hab_index_lang = ability_translation.findIndex(x => x.Description == name_hab);
          var hab_name = ability_translation[hab_index_lang]["English"];
          var hab_value = datos.master[i]["ability_value_"+(j+1)];         
-         treasure_boost_and_master_bonus["treasure_ab"+(j+6)] = [hab_name, hab_value];
+         treasure_boost_and_master_bonus["treasure_ab"+(j+6)] = [hab_name.toLowerCase(), hab_value];
       }
    }
 
-   //print all treasure boost and master bonus for debug purposes
+   
+   // === print all treasure boost and master bonus for debug purposes ===
    // for(let j = 0; j < 10; j++){
    //    if(treasure_boost_and_master_bonus["treasure_ab"+(j+1)] != undefined){
    //       console.log(treasure_boost_and_master_bonus["treasure_ab"+(j+1)][0]);
    //    }
    // }
+
+
+   // === Cambio de nombres, filtros y parseo ===
+   for(let j = 0; j < 10; j++){
+      var trea = treasure_boost_and_master_bonus["treasure_ab"+(j+1)];
+      if(trea != undefined){
+         //convierte "gathering speed" en "gathering_speed" (lo mismo con "lumber gathering speed" en "lumber_gathering_speed")
+         if(trea[0].includes("gathering speed")){trea[0] = trea[0].replace("gathering speed", "gathering_speed");}
+         if(trea[0].includes("training speed")){trea[0] = trea[0].replace("training speed", "training_speed");}
+         if(trea[0].includes("training rate")){trea[0] = trea[0].replace("training rate", "training_rate");}
+         if(trea[0].includes("training cost")){trea[0] = trea[0].replace("training cost", "training_cost");}
+         if(trea[0].includes("research speed")){trea[0] = trea[0].replace("research speed", "research_speed");}
+         if(trea[0].includes("healing speed")){trea[0] = trea[0].replace("healing speed", "healing_speed");}
+         if(trea[0].includes("hospital capacity")){trea[0] = trea[0].replace("hospital capacity", "hospital_capacity");}
+         if(trea[0].includes("construction speed")){trea[0] = trea[0].replace("construction speed", "construction_speed");}
+      }
+   }
+   
+
 
 
 
@@ -282,7 +306,7 @@ for(let i = 0; i < datos.master.length; i++){
    for(let j = 0; j < 10; j++){
       var ability = document.createElement("div");
       if(treasure_boost_and_master_bonus["treasure_ab"+(j+1)] != undefined){
-         ability.className = treasure_boost_and_master_bonus["treasure_ab"+(j+1)][0].toLowerCase();
+         ability.className = treasure_boost_and_master_bonus["treasure_ab"+(j+1)][0];
 
          ability.innerHTML = treasure_boost_and_master_bonus["treasure_ab"+(j+1)][1];
          element.appendChild(ability);
