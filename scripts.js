@@ -15,8 +15,8 @@ function loadImage(path, width, height, target, tooltip) {
 
 function loadFrameAndBackground(grade, width, height, target){
    var grade_string = grade_to_string(grade);
-   var path_frame = "/sprites/item_frame_" + grade_string + ".png";
-   var path_background = "/sprites/item_bg_" + grade_string + ".png";
+   var path_frame = "sprites/item_frame_" + grade_string + ".png";
+   var path_background = "sprites/item_bg_" + grade_string + ".png";
    loadImage(path_frame, width, height, target, "over");
    loadImage(path_background, width, height, target, "under");
 }
@@ -228,6 +228,7 @@ for(let i = 0; i < datos.master.length; i++){
          var hab_name = ability_translation[hab_index_lang]["English"];
          var hab_value_max = datos.pskill[hab_index_pskill].level_value_5;
          treasure_boost_and_master_bonus["treasure_ab"+(j+1)] = [hab_name.toLowerCase(), hab_value_max];
+         //AÑADIR ACA EL TOOLTIP
       }
    } 
 
@@ -286,7 +287,7 @@ for(let i = 0; i < datos.master.length; i++){
    element.className += " " + grade_to_string(datos.item[index_item].grade);
 
    var language = "English";
-   loadImage("/sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, datos.master[i].name);
+   loadImage("sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, datos.master[i].name);
    loadFrameAndBackground(datos.item[index_item].grade, 100, 100, element);
    
 
