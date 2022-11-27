@@ -114,25 +114,17 @@ function isotopeCode(){
       // use function if it matches
       filter = filterFns[ filter ] || filter;      //si el filtro es una función, se usa la función, sino se usa el filtro
       // test each filter
-      // console.log(filters);
 
-      if ( filter ) {         
-      //se fija que el nombre de la clase del item matchee con el filtro (ej. .gold matchee class:"gold")
-      //si coincide con el filtro actual o uno de los hijos tiene la clase filtro, isMatched es true
-      // isMatched = isMatched && $this.is( filter ) || 
+      if ( filter ) {      //si el filtro existe
       //   isMatched = isMatched && $(this).is( filter );      //si el elemento es igual al filtro, se devuelve true, sino false  
+      isMatched = isMatched && ($(this).is( filter ) || $this.find(filter).length > 0 );     //o bien si alguno de los hijos matchea con el filtro (usando find)
 
-        isMatched = isMatched && ($(this).is( filter ) || $this.find(filter).length > 0 );
-      
-      //   console.log($this.find(filter).length);
-        if( filter == "#asd .gold"){
-            // console.log("asd");
-            // console.log($(this).is( filter ));
-        }
-         // console.log($(this).find('.asdfg').text());
-      //   isMatched = isMatched && $(this).find('.research');       //find devuelve 
-        //.is() es un selector de jquery que devuelve true o false
-        //ej de uso: $( "div" ).is( ".foo" );    //si div tiene la clase foo, devuelve true, sino false 
+      //si filters tiene como clave "resources" Y "recursos" entonces
+      //fijate de los hijos, uno que cumpla ambas condiciones de los valores de cada clave
+         if("resources" in filters && "recursos" in filters){
+            var filtros_string = filters["resources"] + filters["recursos"] ;
+            isMatched = isMatched && ($this.find(filtros_string).length > 0 );
+         }
       }
       // break if not matched
       if ( !isMatched ) {
@@ -144,53 +136,14 @@ function isotopeCode(){
 });
 
 
-
-/* <h2>resources</h2>
-<div class="button-group" data-filter-group="resources">
-  <button class="button is-checked" data-filter="*">any</button>
-  <button class="button" data-filter=".gold">gold</button>
-  <button class="button" data-filter=".food">food</button>
-  <button class="button" data-filter=".lumber">lumber</button>
-  <button class="button" data-filter=".stone">stone</button>  
-</div>
-<div class="button-group" data-filter-group="recursos">
-  <button class="button is-checked" data-filter="*">any</button>
-  <button class="button" data-filter=".reserves">reserves</button>
-  <button class="button" data-filter=".capability">capability</button>
-  <button class="button" data-filter=".protection">protection</button>
-  <button class="button" data-filter=".gathering speed">gathering speed</button>  
-  <button class="button" data-filter="speedSearch">speed</button>  
-</div> 
-
-
-<div class="element-item normal boost gold">
-    <h3 class="name">Test</h3>
-    <p class="grade">1</p>
-    <div class="cavalry_speed">0.08</div>   <!-- Solo pongo el maximo nivel -->
-    <div class="cavalry_load">0.1</div>
-    <div class="cavalry_attack">0.08</div>
-    <div class="cavalry_hp">0.1</div>
-    <div class="troops speed">0.07</div>
-    <div class="cavalry_training_rate">0.05</div>
-  </div>
-*/
-
 $('#filters').on( 'click', '.button', function() {    //cuando se hace click en un elemento con clase button dentro de un elemento con id filters
-   // console.log("click");
    var $this = $(this);    //selecciona el elemento que se clickeó
-   // get group key
    var $buttonGroup = $this.parents('.button-group');    //selecciona el elemento padre con clase button-group
-   
-   if ($buttonGroup.attr("data-filter-group") == "resources") {
-      // console.log("recursos");
-   }
-   
+      
    var filterGroup = $buttonGroup.attr('data-filter-group');      //selecciona el atributo data-filter-group del elemento padre
    filters[ filterGroup ] = $this.attr('data-filter');      //selecciona el atributo data-filter del elemento que se clickeó y lo guarda en filters
    //ej. filters = {resources: ".gold", grade: ".legendary"}
 
-   // set filter for group
-   // arrange, and use filter fn
    $grid.isotope();     //aplica el filtro
  });
 
@@ -292,7 +245,13 @@ for(let i = 0; i < datos.master.length; i++){
          treasure_boost_and_master_bonus["treasure_ab"+(j+6)] = [hab_name, hab_value];
       }
    }
-   // console.log(treasure_boost_and_master_bonus["treasure_ab1"][0]);
+
+   //print all treasure boost and master bonus for debug purposes
+   // for(let j = 0; j < 10; j++){
+   //    if(treasure_boost_and_master_bonus["treasure_ab"+(j+1)] != undefined){
+   //       console.log(treasure_boost_and_master_bonus["treasure_ab"+(j+1)][0]);
+   //    }
+   // }
 
 
 
@@ -333,7 +292,7 @@ for(let i = 0; i < datos.master.length; i++){
     // append data to container
     container.appendChild(element);
 
-}
+   }
 
 // una vez cargados los datos del json, se ejecuta el código de isotope
 }).then(() => isotopeCode());
