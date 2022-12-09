@@ -3,6 +3,8 @@ $(function () {
    $('[data-toggle="tooltip"]').tooltip()
  })
 
+ 
+
 function loadImage(path, width, height, target, tooltip) {
    //si el tooltip es para el background y frame
    if(tooltip == "under" | tooltip == "over"){
@@ -12,7 +14,8 @@ function loadImage(path, width, height, target, tooltip) {
    //si es para el sprite
    else {
       // tooltip_string = " ";//armarTooltip(tooltip);
-      $('<img src="'+ path +'"' + ' title="' + tooltip + '" >').on('load', function() {
+      // $('<img src="'+ path +'"' + ' title="' + tooltip + '"' + 'data-toggle="tooltip"' + '>').on('load', function() {
+      $('<img src="'+ path + '"' + '>').on('load', function() {
       $(this).width(width).height(height).appendTo(target);
       });
    }
@@ -192,11 +195,6 @@ $('#filters').on( 'click', '.button', function() {    //cuando se hace click en 
 
 
 
-
-
-
-
-
 // ========= Cargar datos =========
 let json = {};
 var ability_translation = {};
@@ -296,8 +294,24 @@ for(let i = 0; i < datos.master.length; i++){
    element.className += " " + grade_to_string(datos.item[index_item].grade);
 
    var language = "English";
-   // loadImage("sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, tooltip_info);
-   loadImage("sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, datos.master[i].name);
+   // loadImage("sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, tooltip_info["treasure_master_ab"+(6)][0]);
+   // loadImage("sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, datos.master[i].name);
+
+   var img = document.createElement("img");
+   img.src = "sprites/"+ datos.item[index_item].asset +".png";
+   img.width = 80;
+   img.height = 80;
+   img.setAttribute("data-tooltip", "tooltip");
+   img.setAttribute("title", armarTooltip(tooltip_info));
+   element.appendChild(img);
+   // console.log(tooltip_info);
+   
+   // tomar el atributo imagen y agregarle el atributo data-tooltip="tooltip_info"
+   // var img = document.getElementsByTagName("img");
+   // console.log(img);
+   // img.setAttribute("data-tooltip", "tooltip");
+
+
    loadFrameAndBackground(datos.item[index_item].grade, 100, 100, element);
    
    // grado (normal, magico, epico, legendario)
@@ -330,21 +344,26 @@ for(let i = 0; i < datos.master.length; i++){
 
    
 // una vez cargados los datos del json, se ejecuta el código de isotope
-}).then(() => isotopeCode());
+}).then(() => isotopeCode());    //then sirve para 
+
+
 });
 
 
 
-// function armarTooltip(tooltip_info){
-//    var string_tooltip = "";
-//    for(let k = 0; k < 10; k++){
-//       if(tooltip_info["treasure_ab"+(k+1)] != undefined){
-//          // string_tooltip += tooltip_info["treasure_ab"+(k+1)][0] + ": " + tooltip_info["treasure_ab"+(k+1)][1] + "<br>";
-//          string_tooltip += "<ul><li>sub A1</li><li>sub A2</li></ul>";
-//       }
-//       if(tooltip_info["treasure_master_ab"+(k+1)] != undefined){
-//          string_tooltip += "<ul><li>AAAA</li><li>BBBBBB</li></ul>";
-//       }
-//    }
-//    return string_tooltip;
-// }
+
+
+function armarTooltip(tooltip_info){
+   var string_tooltip = "";
+   for(let k = 0; k < 10; k++){
+      if(tooltip_info["treasure_ab"+(k+1)] != undefined){
+         string_tooltip += tooltip_info["treasure_ab"+(k+1)][0] + ": " + tooltip_info["treasure_ab"+(k+1)][1] + "\n";
+         // string_tooltip += "<ul><li>sub A1</li><li>sub A2</li></ul>";
+      }
+      if(tooltip_info["treasure_master_ab"+(k+1)] != undefined){
+         string_tooltip += tooltip_info["treasure_master_ab"+(k+1)][0] + ": " + tooltip_info["treasure_master_ab"+(k+1)][1] + "\n";
+         // string_tooltip += "<ul><li>AAAA</li><li>BBBBBB</li></ul>";
+      }
+   }
+   return string_tooltip;
+}

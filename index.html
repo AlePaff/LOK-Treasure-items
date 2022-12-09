@@ -4,24 +4,46 @@
 <head>
   <meta charset="utf-8">
   <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg" />
+  <title>LOK Treasure-Items</title>
+
 
   <!-- para el fondo de los tooltips -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
-
-
+  
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+  
+<!-- <script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+  console.log('DOM fully loaded and parsed');
+});
+</script> -->
+
+
+
+  
+    <!-- <script>
+      $(document).ready(function() {
+          console.log('jQuery type is: ' + typeof $);
+          console.log('Bootstrap modal type is: ' + typeof $().modal);
+          console.log('Popper type is: ' + typeof Popper);
+          console.log('Isotope type is: ' + typeof Isotope);
+      });
+  </script> -->
+
 
   <!-- librería de terceros para los tooltip de boostrap -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
   <!-- boostrap para los tooltips -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  
 
   <script src="scripts.js"></script>
 
 
-  <title>LOK Treasure-Items</title>
+
+
 </head>
 
 
@@ -29,6 +51,10 @@
 
 
 <body>
+
+
+
+
 
 
   <h2>Lok treasure items, using Isotope</h2>
@@ -123,16 +149,16 @@
       <button class="button" data-sort-by="grade">grade</button>
     </div>
 
-
     <div class="grid" id="contenedor">
       <div class="element-item normal boost" id="asd">
-        <h3 class="name">AAAAAAAAAA</h3>
+        <!-- <h3 class="name">AAAAAAAAAA</h3> -->
         <div class="gold protection reserves aljsldksajd laskjdlasjd lasjdlksdj ">0.1</div>
         <div class="protection reserves">0.1</div>
         <div class="protection reserves">0.1</div>
         <div class="protection reserves">0.1</div>
 
-        <!-- <img src="sprites/icon_10501001.png" data-html="true" title="<em>Manure</em> <u>with</u> <b>HTML</b>" -->
+        <div class="tooltip">Hover over me<span class="tooltiptext">Tooltip text</span></div>
+
         <img src="sprites/icon_10501001.png" data-html="true" title="
           <ul>
             <li>sub A1</li>
@@ -154,6 +180,11 @@
         <div class="maximun reiforcement troop size">0.05</div>
         <div class="research speed">0.05</div>
         <div class="teleport lvl2">2</div>
+
+          <img src="sprites/icon_10501001.png" title="TEST" style="width: 80px; height: 80px;" data-toggle="tooltip">
+  
+
+
       </div>
       <div class="element-item legendary">
         <h3 class="name">crystal flask</h3>
