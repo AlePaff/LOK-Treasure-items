@@ -1,7 +1,8 @@
 
-$(function () {
+
+function initTooltips(){
    $('[data-toggle="tooltip"]').tooltip()
- })
+  }
 
  
 
@@ -61,7 +62,7 @@ function grade_to_string(grade){
 
 
 // external js: isotope.pkgd.js
-$(document).ready(function() {      //se fija cuando el documento está listo para ejecutar el código
+// $(document).ready(function() {      //se fija cuando el documento está listo para ejecutar el código
 // $() es un selector de elementos de jquery, es como document.getElementById() pero más potente
 // luego de ready se ejecuta una función anónima (una función que no tiene nombre, se ejecuta cuando se llama)
 
@@ -199,12 +200,14 @@ $('#filters').on( 'click', '.button', function() {    //cuando se hace click en 
 let json = {};
 var ability_translation = {};
 
-// === Lectura del json y creación de los elementos ===
-$.getJSON("ability_translation.json", function(traducciones) {
-   ability_translation = traducciones;
-});
 
-$.getJSON("data.json", function(datos){
+// === Lectura del json y creación de los elementos ===
+const promise1 = $.getJSON("ability_translation.json", function(traducciones) {
+   ability_translation = traducciones;
+ });
+
+ const promise2 = $.getJSON("data.json", function(datos){
+
    json = datos;
 
 // console.log("ahora mismo hay "+ datos.master.length + " tesoros");
@@ -342,12 +345,33 @@ for(let i = 0; i < datos.master.length; i++){
 
    }
 
-   
-// una vez cargados los datos del json, se ejecuta el código de isotope
-}).then(() => isotopeCode());    //then sirve para 
-
-
+   // una vez cargados los datos del json, se ejecuta el código de isotope
 });
+
+
+Promise.all([promise1, promise2]).then((values) => {
+   console.log("All promises resolved");
+   
+   loadScript('https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js');
+   loadScript('https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js');
+
+   console.log("Scripts loaded");
+   isotopeCode();
+   initTooltips();
+ });
+ 
+
+function loadScript(src) {
+   // creates a <script> tag and append it to the page
+   // this causes the script with given src to start loading and run when complete
+   let script = document.createElement('script');
+   script.src = src;
+   document.head.append(script);
+ }
+ 
+
+
+
 
 
 
