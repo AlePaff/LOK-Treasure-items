@@ -202,11 +202,9 @@ var ability_translation = {};
 
 
 // === Lectura del json y creación de los elementos ===
-const promise1 = $.getJSON("ability_translation.json", function(traducciones) {
+$.getJSON("ability_translation.json", function(traducciones) {
    ability_translation = traducciones;
- });
-
- const promise2 = $.getJSON("data.json", function(datos){
+   $.getJSON("data.json", function(datos){
 
    json = datos;
 
@@ -346,16 +344,11 @@ for(let i = 0; i < datos.master.length; i++){
    }
 
    // una vez cargados los datos del json, se ejecuta el código de isotope
-});
 
-
-Promise.all([promise1, promise2]).then((values) => {   
-   isotopeCode();
    initTooltips();
- });
- 
- 
-
+   isotopeCode();
+   });
+}); 
 
 
 
