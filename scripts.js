@@ -349,25 +349,11 @@ for(let i = 0; i < datos.master.length; i++){
 });
 
 
-Promise.all([promise1, promise2]).then((values) => {
-   console.log("All promises resolved");
-   
-   loadScript('https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js');
-   loadScript('https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js');
-
-   console.log("Scripts loaded");
+Promise.all([promise1, promise2]).then((values) => {   
    isotopeCode();
    initTooltips();
  });
  
-
-function loadScript(src) {
-   // creates a <script> tag and append it to the page
-   // this causes the script with given src to start loading and run when complete
-   let script = document.createElement('script');
-   script.src = src;
-   document.head.append(script);
- }
  
 
 
