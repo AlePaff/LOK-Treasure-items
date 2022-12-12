@@ -302,7 +302,7 @@ for(let i = 0; i < datos.master.length; i++){
    img.src = "sprites/"+ datos.item[index_item].asset +".png";
    img.width = 80;
    img.height = 80;
-   img.setAttribute("data-tooltip", "tooltip");
+   img.setAttribute("data-toggle", "tooltip");
    img.setAttribute("title", armarTooltip(tooltip_info));
    element.appendChild(img);
    // console.log(tooltip_info);
