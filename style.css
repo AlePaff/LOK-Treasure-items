@@ -1,9 +1,21 @@
 
 * { box-sizing: border-box; }
 
+
+
+
 body {
   font-family: sans-serif;
   height: 1100px;       /* tamaño fijo */
+	padding: 20px;
+  /* color: rgb(255, 255, 255); */
+  color: #CE3570;
+  
+  /* background-color: #343838; */
+  /* background-color: #30243E; */
+  /* background-color: #49354e; */
+  /* background-color: #7e5286; */
+  background-color: #654472;
 }
 
 /* ---- button ---- */
@@ -14,11 +26,15 @@ li{
 .button {
   display: inline-block;
   padding: 0.5em 1.0em;
-  background: #EEE;
+  /* background: #EEE; */
+  /* background: #62508f; */
+  background: #a74eaa;
+
   border: none;
   border-radius: 7px;
   background-image: linear-gradient( to bottom, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.2) );
-  color: #222;
+  /* color: #222; */
+  color: #EEE;
   font-family: sans-serif;
   font-size: 16px;
   text-shadow: 0 1px white;
@@ -26,19 +42,22 @@ li{
 }
 
 .button:hover {
-  background-color: #8CF;
+  /* background-color: #8CF; */
+  background-color: #6B5B95;
   text-shadow: 0 1px hsla(0, 0%, 100%, 0.5);
-  color: #222;
+  color: #EEE;
 }
 
 .button:active,
 .button.is-checked {
-  background-color: #28F;
+  /* background-color: #28F; */
+  background-color: #8d45d4;
+  /* background-color: #614f8d; */
 }
 
 .button.is-checked {
   color: white;
-  text-shadow: 0 -1px hsla(0, 0%, 0%, 0.8);
+  text-shadow: 0 -1px hsla(0, 0%, 100%, 0.8);
 }
 
 .button:active {
@@ -49,6 +68,7 @@ li{
 
 .button-group {
   margin-bottom: 2px;
+  /* display: inline-block; */
 }
 
 .button-group:after {
@@ -157,17 +177,6 @@ li{
 }
 
 
-body{
-	/* text-align:center; */
-	/*color que tiene google*/
-	/* /* background-color: #202124; */
-	color: darkgray;
-
-	background-color: #343838;
-	padding: 20px;
-}
-
-
 /* para agregar un tab entre los tooltip */
 .tab {
   display: inline-block;
@@ -182,40 +191,3 @@ body{
 
 
 
-/*estilos de las tablas*/
-
-/*
-table {
-	border-collapse: collapse;
-	border: 2px gray solid;
-	font: 15px sans-serif;
-	text-align:center;
-
-	display: table;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-
-
-td {
-	border: 2px gray solid;
-	padding: 5px;
-} */
-
-/*para striped rows*/
-/* tr:nth-child(even) {background-color: #2c3034;} */
-/* tr:nth-child(odd) {background-color: #212529;} */
-/*pasar mouse por encima y que resalte una fila*/
-/* tr:hover {background-color: #543245;} */
-/*pero que no resalte la primera (pinta del mismo color que el de las columnas pares)*/
-/* tr:first-child:hover {background-color: #212529;} */
-
-
-/*azul #364F6B*/
-
-
-/*
-td stands for table data.
-tr stands for table row.
-th stands for table header*/

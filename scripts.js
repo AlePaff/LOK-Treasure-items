@@ -20,6 +20,8 @@ function armarTooltip(tooltip_info){
             valor = "%" + Math.round(valor * 100);
          }
          tb += "- " + nombre + ":" + tab + valor + "<br>";
+         // tb += "<p style='text-align:left;'>" + nombre +tab+ "<span style='float:right;'>" + valor + "</span></p>";
+         // tb += "<p style='display: flex; justify-content: space-between; white-space:nowrap;'>" + "<span>"+ nombre +"</span>"+ "<span>" + valor + "</span></p>";
       }
       if(tooltip_info[mb_code+(k+1)] != undefined){
          nombre = tooltip_info[mb_code+(k+1)][0];
