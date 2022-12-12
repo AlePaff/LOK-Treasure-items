@@ -1,29 +1,50 @@
-
-
+//inicializa los tooltips de bootstrap
 function initTooltips(){
    $('[data-toggle="tooltip"]').tooltip()
   }
 
- 
+//dadas las estadisticas de un objeto arma un tooltip para ser mostrado en las tarjetas
+function armarTooltip(tooltip_info){
+   var string_tooltip = "";
+   var tb = "<u>Treasure Boost (Max. lvl)</u><br>";
+   var mb = "<u>Master Bonus</u><br>";
+   var tab = "<span class='tab'></span>";
+   var tb_code = "treasure_ab";
+   var mb_code = "treasure_master_ab";
 
-function loadImage(path, width, height, target, tooltip) {
+   for(let k=0; k < 10; k++){
+      if(tooltip_info[tb_code+(k+1)] != undefined){
+         nombre = tooltip_info[tb_code+(k+1)][0];
+         valor = tooltip_info[tb_code+(k+1)][1];
+         if(valor < 1){    //si se trata de un porcentaje
+            valor = "%" + Math.round(valor * 100);
+         }
+         tb += "- " + nombre + ":" + tab + valor + "<br>";
+      }
+      if(tooltip_info[mb_code+(k+1)] != undefined){
+         nombre = tooltip_info[mb_code+(k+1)][0];
+         valor = tooltip_info[mb_code+(k+1)][1];
+         if(valor < 1){
+            valor = "%" + Math.round(valor * 100);
+         }
+         mb += "- " + nombre + ":" + tab + valor + "<br>";
+      }
+   }
+   string_tooltip = tb + mb;
+   return string_tooltip;
+}
+
+//carga una imagen en el target especificado
+// ejemplo de uso:  loadImage("/sprites/icon_10502015.png", 80, 80, "#test_img");
+function loadImage(path, width, height, target, back) {
    //si el tooltip es para el background y frame
-   if(tooltip == "under" | tooltip == "over"){
-      $('<img src="'+ path +'"' + 'class="' + tooltip + '">').on('load', function() {
+   if(back == "under" | back == "over"){
+      $('<img src="'+ path +'"' + 'class="' + back + '">').on('load', function() {
          $(this).width(width).height(height).appendTo(target);
       })}
-   //si es para el sprite
-   else {
-      // tooltip_string = " ";//armarTooltip(tooltip);
-      // $('<img src="'+ path +'"' + ' title="' + tooltip + '"' + 'data-toggle="tooltip"' + '>').on('load', function() {
-      $('<img src="'+ path + '"' + '>').on('load', function() {
-      $(this).width(width).height(height).appendTo(target);
-      });
-   }
 }
-// ejemplo de uso 
-// loadImage("/sprites/icon_10502015.png", 80, 80, "#test_img");
 
+//carga el background y el frame de un item
 function loadFrameAndBackground(grade, width, height, target){
    var grade_string = grade_to_string(grade);
    var path_frame = "sprites/item_frame_" + grade_string + ".png";
@@ -32,7 +53,7 @@ function loadFrameAndBackground(grade, width, height, target){
    loadImage(path_background, width, height, target, "under");
 }
 
-
+//asigna el grado de un item a su nombre
 function grade_to_string(grade){
    if(grade == 1){
       return "normal";
@@ -45,27 +66,7 @@ function grade_to_string(grade){
    }
 }
 
-// leer_json();
-// async function leer_json(){      //async significa que la función es asíncrona (no se ejecuta de forma secuencial)
-//    const response = await fetch("data.json");   //await significa que espera a que la petición fetch() termine, y fetch es una petición a un servidor (en este caso a un archivo json)
-//    const datos = await response.json();      //aca espera a que la petición json() termine (la cual es del tipo Promise)
-
-
-// fetch('data.json')      //fetch es una petición a un servidor (en este caso a un archivo json)
-//    .then(response => response.json())     //response es del tipo json, por lo que se usa el método json() para convertirlo en un objeto de javascript
-//    .then(datos => {                  //datos es el objeto de javascript ya parseado
-
-// $(document).ready(function(){
-   
-// });
-
-
-
-// external js: isotope.pkgd.js
-// $(document).ready(function() {      //se fija cuando el documento está listo para ejecutar el código
-// $() es un selector de elementos de jquery, es como document.getElementById() pero más potente
-// luego de ready se ejecuta una función anónima (una función que no tiene nombre, se ejecuta cuando se llama)
-
+// ejecuta el codigo y la logica de isotope
 function isotopeCode(){   
    
    // filter functions
@@ -202,10 +203,11 @@ var ability_translation = {};
 
 
 // === Lectura del json y creación de los elementos ===
-$.getJSON("ability_translation.json", function(traducciones) {
+const promise1 = $.getJSON("ability_translation.json", function(traducciones) {
    ability_translation = traducciones;
-   $.getJSON("data.json", function(datos){
+ });
 
+const promise2 = $.getJSON("data.json", function(datos){
    json = datos;
 
 // console.log("ahora mismo hay "+ datos.master.length + " tesoros");
@@ -295,24 +297,18 @@ for(let i = 0; i < datos.master.length; i++){
    element.className += " " + grade_to_string(datos.item[index_item].grade);
 
    var language = "English";
-   // loadImage("sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, tooltip_info["treasure_master_ab"+(6)][0]);
-   // loadImage("sprites/"+ datos.item[index_item].asset +".png", 80, 80, element, datos.master[i].name);
 
+   // crea la imagen del item
    var img = document.createElement("img");
    img.src = "sprites/"+ datos.item[index_item].asset +".png";
    img.width = 80;
    img.height = 80;
    img.setAttribute("data-toggle", "tooltip");
+   img.setAttribute("data-html", true);
    img.setAttribute("title", armarTooltip(tooltip_info));
    element.appendChild(img);
-   // console.log(tooltip_info);
-   
-   // tomar el atributo imagen y agregarle el atributo data-tooltip="tooltip_info"
-   // var img = document.getElementsByTagName("img");
-   // console.log(img);
-   // img.setAttribute("data-tooltip", "tooltip");
 
-
+   // crea el frame del item
    loadFrameAndBackground(datos.item[index_item].grade, 100, 100, element);
    
    // grado (normal, magico, epico, legendario)
@@ -321,7 +317,7 @@ for(let i = 0; i < datos.master.length; i++){
    grade.innerHTML = datos.item[index_item].grade;
    element.appendChild(grade);
    
-   //nombre del tesoro
+   //nombre del tesoro (depende de la logica de isotope, en un futuro añadirlo para cada idioma)
    var name = document.createElement("div");
    name.className = "name";
    name.innerHTML = datos.master[i].name;
@@ -340,33 +336,16 @@ for(let i = 0; i < datos.master.length; i++){
    
     // append data to container
     container.appendChild(element);
-
    }
 
    // una vez cargados los datos del json, se ejecuta el código de isotope
+ });
 
-   initTooltips();
+
+
+Promise.all([promise1, promise2]).then((values) => {   
    isotopeCode();
-   });
-}); 
+   initTooltips();
+ });
 
 
-
-
-
-
-
-function armarTooltip(tooltip_info){
-   var string_tooltip = "";
-   for(let k = 0; k < 10; k++){
-      if(tooltip_info["treasure_ab"+(k+1)] != undefined){
-         string_tooltip += tooltip_info["treasure_ab"+(k+1)][0] + ": " + tooltip_info["treasure_ab"+(k+1)][1] + "\n";
-         // string_tooltip += "<ul><li>sub A1</li><li>sub A2</li></ul>";
-      }
-      if(tooltip_info["treasure_master_ab"+(k+1)] != undefined){
-         string_tooltip += tooltip_info["treasure_master_ab"+(k+1)][0] + ": " + tooltip_info["treasure_master_ab"+(k+1)][1] + "\n";
-         // string_tooltip += "<ul><li>AAAA</li><li>BBBBBB</li></ul>";
-      }
-   }
-   return string_tooltip;
-}

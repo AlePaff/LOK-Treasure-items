@@ -41,29 +41,6 @@
 
   <h2>Lok treasure items, using Isotope</h2>
   <div id="filters">
-    <!-- <h2>Filter (show only)</h2> -->
-    <!-- <div class="button-group"> -->
-    <!-- <button class="button is-checked" data-filter="*">show all</button> -->
-    <!-- <button class="button" data-filter=".metal">metal</button>
-  <button class="button" data-filter=".transition">transition</button>
-  <button class="button" data-filter=".alkali, .alkaline-earth">alkali and alkaline-earth</button>
-  <button class="button" data-filter=":not(.transition)">not transition</button>
-  <button class="button" data-filter=".metal:not(.transition)">metal but not transition</button>
-  <button class="button" data-filter="numberGreaterThan50">number > 50</button>
-  <button class="button" data-filter="ium">name ends with &ndash;ium</button>
-
-  <button class="button" data-filter="gradeLegendary">grade legendary</button> -->
-    <!-- </div> -->
-
-    <h2>filter by grade</h2>
-    <div class="button-group" data-filter-group="grade">
-      <button class="button is-checked" data-filter="*">any</button>
-      <button class="button" data-filter=".legendary">legendary</button>
-      <button class="button" data-filter=".epic">epic</button>
-      <button class="button" data-filter=".magic">magic</button>
-      <button class="button" data-filter=".normal">normal</button>
-    </div>
-
 
     <h2>resources</h2>
     <div class="button-group" data-filter-group="resources">
@@ -102,8 +79,6 @@
       <button class="button Disabled" data-filter=".training_cost">training cost</button>
     </div>
 
-
-
     <h2>healing</h2>
     <div class="button-group" data-filter-group="battle">
       <button class="button is-checked" data-filter="*">any</button>
@@ -122,7 +97,15 @@
       <button class="button" data-filter=".construction_speed">construction speed</button>
       <button class="button" data-filter=".research_speed">research speed</button>
     </div>
-
+    
+    <h2>filter by grade</h2>
+    <div class="button-group" data-filter-group="grade">
+      <button class="button is-checked" data-filter="*">any</button>
+      <button class="button" data-filter=".legendary">legendary</button>
+      <button class="button" data-filter=".epic">epic</button>
+      <button class="button" data-filter=".magic">magic</button>
+      <button class="button" data-filter=".normal">normal</button>
+    </div>
 
     <h2>Sort by category</h2>
     <div id="sorts" class="button-group">
@@ -130,6 +113,7 @@
       <button class="button" data-sort-by="name">name</button>
       <button class="button" data-sort-by="grade">grade</button>
     </div>
+
 
     <div class="grid" id="contenedor">
       <div class="element-item normal boost" id="asd">
@@ -139,16 +123,17 @@
         <div class="protection reserves">0.1</div>
         <div class="protection reserves">0.1</div>
 
-        <div class="tooltip">Hover over me<span class="tooltiptext">Tooltip text</span></div>
-
         <img src="sprites/icon_10501001.png" data-html="true" title="
-          <ul>
-            <li>sub A1</li>
-            <li>sub A2</li>
-          </ul><ul>
-            <li>sub A1</li>
-            <li>sub A2</li>
-          </ul>" style="width: 80px; height: 80px;" data-toggle="tooltip">
+        
+        <u>Treasure Boost</u><br>
+        Food Production: <span class='tab'></span>0.05<br> 
+        Food storage capacity: <span class='tab'></span>0.05<br>
+        <u>Master Bonus</u><br>
+        Food Production: <span class='tab'></span>0.05<br>
+        Gathering Speed: <span class='tab'></span>0.03<br>
+
+        
+        " style="width: 80px; height: 80px;" data-toggle="tooltip">
 
       </div>
       <div class="element-item epic boost buff ">

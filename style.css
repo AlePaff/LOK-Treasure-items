@@ -168,8 +168,24 @@ body{
 }
 
 
+/* para agregar un tab entre los tooltip */
+.tab {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+/*para que el tooltip no se salga de la pantalla*/
+.tooltip-inner {
+  text-align: left;
+  max-width: none;
+}   
+
+
+
 /*estilos de las tablas*/
-/* table {
+
+/*
+table {
 	border-collapse: collapse;
 	border: 2px gray solid;
 	font: 15px sans-serif;
@@ -179,6 +195,8 @@ body{
 	margin-right: auto;
 	margin-left: auto;
 }
+
+
 
 td {
 	border: 2px gray solid;
