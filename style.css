@@ -1,24 +1,20 @@
-
 * { box-sizing: border-box; }
 
-
-
-
 body {
-  font-family: sans-serif;
+  font-family: 'Lexend Deca';
   height: 1100px;       /* tamaño fijo */
 	padding: 20px;
   /* color: rgb(255, 255, 255); */
-  color: #CE3570;
-  
+  color: #3e3e3e;
+
   /* background-color: #343838; */
   /* background-color: #30243E; */
   /* background-color: #49354e; */
   /* background-color: #7e5286; */
-  background-color: #654472;
+  background-color: #52b8cb;
 }
 
-/* ---- button ---- */
+/* ---------------- button ---------------- */
 li{
   display:inline-block;
 }
@@ -28,44 +24,57 @@ li{
   padding: 0.5em 1.0em;
   /* background: #EEE; */
   /* background: #62508f; */
-  background: #a74eaa;
+  background: #5d7987;
 
   border: none;
   border-radius: 7px;
   background-image: linear-gradient( to bottom, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.2) );
   /* color: #222; */
   color: #EEE;
-  font-family: sans-serif;
+  font-family: 'Varela Round';
   font-size: 16px;
-  text-shadow: 0 1px white;
+  /* text-shadow: 0 1px white; */
   cursor: pointer;
 }
 
 .button:hover {
   /* background-color: #8CF; */
-  background-color: #6B5B95;
-  text-shadow: 0 1px hsla(0, 0%, 100%, 0.5);
+  /* background-color: #62508f; */
+  background-color: #724bdf;
+  /* text-shadow: 0 1px hsla(0, 0%, 100%, 0.5); */
   color: #EEE;
 }
 
 .button:active,
 .button.is-checked {
   /* background-color: #28F; */
-  background-color: #8d45d4;
+  /* background-color: #442597; */
   /* background-color: #614f8d; */
+  background-color: #6642c7;
 }
 
 .button.is-checked {
   color: white;
-  text-shadow: 0 -1px hsla(0, 0%, 100%, 0.8);
+  text-shadow: 0 1px hsla(0, 0%, 100%, 0.5);
 }
 
 .button:active {
   box-shadow: inset 0 1px 10px hsla(0, 0%, 0%, 0.8);
 }
 
-/* ---- button-group ---- */
 
+/* hacer botones inabilitados */
+.Disabled{
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+
+/* ---------------- button-group ---------------- */
 .button-group {
   margin-bottom: 2px;
   /* display: inline-block; */
@@ -87,11 +96,12 @@ li{
 .button-group .button:first-child { border-radius: 0.5em 0 0 0.5em; }
 .button-group .button:last-child { border-radius: 0 0.5em 0.5em 0; }
 
-/* ---- isotope ---- */
 
-.grid {
+/* ---------------- isotope ---------------- */
+/* borde del grid: */
+/* .grid {
   border: 1px solid #333;
-}
+} */
 
 /* clear fix */
 .grid:after {
@@ -100,8 +110,8 @@ li{
   clear: both;
 }
 
-/* ---- .element-item ---- */
 
+/* ---------------- .element-item ---------------- */
 .element-item {
   position: relative;
   float: left;
@@ -144,6 +154,9 @@ li{
   top: 5px;
 }
 
+
+
+/* ---------------- items ---------------- */
 /* ocultar todos los elementos de tipo div dentro de cada item */
 .element-item div {
   position: absolute;
@@ -164,19 +177,6 @@ li{
   z-index: -1;
 }
 
-
-
-/* hacer botones inabilitados */
-.Disabled{
-  pointer-events: none;
-  cursor: not-allowed;
-  opacity: 0.65;
-  filter: alpha(opacity=65);
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-
 /* para agregar un tab entre los tooltip */
 .tab {
   display: inline-block;
@@ -190,4 +190,20 @@ li{
 }   
 
 
+/* ---------------- titulo ---------------- */
+#titulo {
+  /* texto centrado y que ocupe todo el ancho */
+  text-align: center;
+  width:100%;
+}
 
+#titulo > span {
+  /* personalizar el interior del titulo  */
+  height: 50px;
+  padding: 15px;
+  border-radius: 20px;
+  width:100px; 
+  /* background: #7b6cce; */
+  background: #ffd472;
+  font-weight: bold;
+}
