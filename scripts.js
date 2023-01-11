@@ -91,9 +91,9 @@ function isotopeCode(){
          var name = $(this).find('.research').text();    //busca las que tengan speed Y research (para otros ifs ver https://isotope.metafizzy.co/filtering.html)
          // console.log(name);
          return name;
-      }
-
-
+      },
+      
+      
       // legendary: function() {
       //    var grade = $(this).find('.grade').text();
       //    return parseInt(grade, 10) == 4;
@@ -138,6 +138,9 @@ function isotopeCode(){
 
       //si filters tiene como clave "resources" Y "resources_specific" entonces
       //fijate de los hijos, uno que cumpla ambas condiciones de los valores de cada clave
+      //    Esto no puedo hacerlo solo con isotope desde el html talque ".gold .reserves", debe ser "(.gold|lumber|stone|food|any|resource), .reserves"
+      //    y este aproach no funciona porque es poco flexible, no se puede hacer una logica condicional compleja
+      //    y si quiero buscar solo reserves estoy limitado a alguno de los otros
          if("resources" in filters && "resources_specific" in filters){
             var filtros_string = filters["resources"] + filters["resources_specific"] ;
             isMatched = isMatched && ($this.find(filtros_string).length > 0 );
@@ -246,6 +249,8 @@ for(let i = 0; i < datos.master.length; i++){
       }
    } 
 
+   tiene_debuff = false;
+   tiene_buff = false;
    //habilidades master
    for(let j = 0; j < 5; j++){
       hab_number = datos.master[i]["ability_"+(j+1)];
@@ -254,8 +259,15 @@ for(let i = 0; i < datos.master.length; i++){
          var index_ab_special = datos.askill.findIndex(x => x.code == hab_number && x.level == hab_j_lvl);
          var name_special = datos.askill[index_ab_special].name;     //Instant harvest 1
          var abilityValue = datos.askill[index_ab_special].ability_value_1;      //1
+         // console.log(name_special + "   " + abilityValue);
          treasure_boost_and_master_bonus["treasure_ab"+(j+6)] = [name_special.toLowerCase(), abilityValue];
          tooltip_info["treasure_master_ab"+(j+6)] = [name_special, abilityValue];
+
+         if(abilityValue < 0)
+            tiene_debuff = true;
+         else
+            tiene_buff = true;
+
       }
       else if(hab_number != 0){
          var name_hab = "ability_" + hab_number;
@@ -287,6 +299,8 @@ for(let i = 0; i < datos.master.length; i++){
          if(trea[0].includes("training cost")){trea[0] = trea[0].replace("training cost", "training_cost");}
          if(trea[0].includes("research speed")){trea[0] = trea[0].replace("research speed", "research_speed");}
          if(trea[0].includes("healing speed")){trea[0] = trea[0].replace("healing speed", "healing_speed");}
+         if(trea[0].includes("action point")){trea[0] = trea[0].replace("action point", "action_point");}
+         
          // if(trea[0].includes("hospital capacity")){trea[0] = trea[0].replace("hospital capacity", "hospital_capacity");}
          if(trea[0].includes("construction speed")){trea[0] = trea[0].replace("construction speed", "construction_speed");}
       }
@@ -295,10 +309,12 @@ for(let i = 0; i < datos.master.length; i++){
 
 
 
+
    // ==== create the elems needed ====
    var element = document.createElement("div");
    element.className = "element-item";  
    element.className += " " + grade_to_string(datos.item[index_item].grade);
+   element.className += (tiene_debuff ? " debuff":"") + (tiene_buff ? " buff":"");
 
    var language = "English";
 
@@ -315,7 +331,7 @@ for(let i = 0; i < datos.master.length; i++){
 
    // crea el frame del item
    loadFrameAndBackground(datos.item[index_item].grade, 100, 100, element);
-   
+
    // grado (normal, magico, epico, legendario)
    var grade = document.createElement("div");
    grade.className = "grade";
