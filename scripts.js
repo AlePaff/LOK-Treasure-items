@@ -18,7 +18,7 @@ function armarTooltip(tooltip_info){
          nombre = tooltip_info[tb_code+(k+1)][0];
          valor = tooltip_info[tb_code+(k+1)][1];
          if(valor < 1){    //si se trata de un porcentaje
-            valor = "%" + Math.round(valor * 100);
+            valor = Math.round(valor * 100) + "%";
          }
          tb += "- " + nombre + ":" + tab + valor + "<br>";
          // tb += "<p style='text-align:left;'>" + nombre +tab+ "<span style='float:right;'>" + valor + "</span></p>";
@@ -29,7 +29,7 @@ function armarTooltip(tooltip_info){
          nombre = tooltip_info[mb_code+(k+1)][0];
          valor = tooltip_info[mb_code+(k+1)][1];
          if(valor < 1){
-            valor = "%" + Math.round(valor * 100);
+            valor = Math.round(valor * 100) + "%";
          }
          mb += "- " + nombre + ":" + tab + valor + "<br>";
       }
@@ -259,7 +259,6 @@ for(let i = 0; i < datos.master.length; i++){
          var index_ab_special = datos.askill.findIndex(x => x.code == hab_number && x.level == hab_j_lvl);
          var name_special = datos.askill[index_ab_special].name;     //Instant harvest 1
          var abilityValue = datos.askill[index_ab_special].ability_value_1;      //1
-         // console.log(name_special + "   " + abilityValue);
          treasure_boost_and_master_bonus["treasure_ab"+(j+6)] = [name_special.toLowerCase(), abilityValue];
          tooltip_info["treasure_master_ab"+(j+6)] = [name_special, abilityValue];
 
@@ -325,7 +324,7 @@ for(let i = 0; i < datos.master.length; i++){
    img.height = 80;
    img.setAttribute("data-toggle", "tooltip");
    img.setAttribute("data-html", true);
-   nombre_item = datos.master[i].name.charAt(0).toUpperCase() + datos.master[i].name.slice(1) + "<br>";     //capitaliza la primer letra
+   nombre_item = "<h5>" + datos.master[i].name.charAt(0).toUpperCase() + datos.master[i].name.slice(1) + "</h5>";     //capitaliza la primer letra
    img.setAttribute("title", nombre_item + armarTooltip(tooltip_info));
    element.appendChild(img);
 
