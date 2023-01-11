@@ -11,7 +11,9 @@ body {
   /* background-color: #30243E; */
   /* background-color: #49354e; */
   /* background-color: #7e5286; */
-  background-color: #52b8cb;
+  /* background-color: #52b8cb; */
+ 
+  background: radial-gradient(circle, #52b8cb 44%, #b0bbf7 100%);
 }
 
 /* ---------------- button ---------------- */
@@ -95,6 +97,24 @@ li{
 
 .button-group .button:first-child { border-radius: 0.5em 0 0 0.5em; }
 .button-group .button:last-child { border-radius: 0 0.5em 0.5em 0; }
+
+
+/* cajas contenedoras */
+#bloque-filtros{
+  background-color: #c4d88c;
+  border-radius: 15px;
+  padding: 10px;
+  display: inline-block;
+  margin-bottom: 0.25em;
+  /* display: flex; */
+}
+
+#bloque-sorts{
+  background-color: #c4d88c;
+  border-radius: 15px;
+  padding: 10px;
+  display: inline-block;
+}
 
 
 /* ---------------- isotope ---------------- */
@@ -195,6 +215,7 @@ li{
   /* texto centrado y que ocupe todo el ancho */
   text-align: center;
   width:100%;
+  margin-bottom: 1em;
 }
 
 #titulo > span {
