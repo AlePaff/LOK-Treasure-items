@@ -13,6 +13,7 @@ function armarTooltip(tooltip_info){
    var mb_code = "treasure_master_ab";
 
    for(let k=0; k < 10; k++){
+      // treasure boost
       if(tooltip_info[tb_code+(k+1)] != undefined){
          nombre = tooltip_info[tb_code+(k+1)][0];
          valor = tooltip_info[tb_code+(k+1)][1];
@@ -23,6 +24,7 @@ function armarTooltip(tooltip_info){
          // tb += "<p style='text-align:left;'>" + nombre +tab+ "<span style='float:right;'>" + valor + "</span></p>";
          // tb += "<p style='display: flex; justify-content: space-between; white-space:nowrap;'>" + "<span>"+ nombre +"</span>"+ "<span>" + valor + "</span></p>";
       }
+      // master boost
       if(tooltip_info[mb_code+(k+1)] != undefined){
          nombre = tooltip_info[mb_code+(k+1)][0];
          valor = tooltip_info[mb_code+(k+1)][1];
@@ -307,7 +309,8 @@ for(let i = 0; i < datos.master.length; i++){
    img.height = 80;
    img.setAttribute("data-toggle", "tooltip");
    img.setAttribute("data-html", true);
-   img.setAttribute("title", armarTooltip(tooltip_info));
+   nombre_item = datos.master[i].name.charAt(0).toUpperCase() + datos.master[i].name.slice(1) + "<br>";     //capitaliza la primer letra
+   img.setAttribute("title", nombre_item + armarTooltip(tooltip_info));
    element.appendChild(img);
 
    // crea el frame del item
