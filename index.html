@@ -33,12 +33,10 @@
 
 
   <h2 id="titulo"><span>Lok Treasure Items</span></h2>
-  <div id="filters">
 
-    <!-- <div style="display: flex; justify-content: space-between; width: 20rem;">
-    </div> -->
 
-    <div id="bloque-filtros">
+  <div id="buttons-container">
+    <div id="bloque-botones-1" class="filters">
       <h4>Resources:</h4>
       <div class="button-group" data-filter-group="resources">
         <button class="button is-checked" data-filter="*">any</button>
@@ -72,7 +70,10 @@
         <button class="button" data-filter=".hp">hp</button>
         <button class="button" data-filter=".defense">defense</button>
         <button class="button" data-filter=".load">load</button>
-        <button class="button" data-filter=".training_rate">training rate</button>
+        <button class="button" data-delay='{"show":"3000", "hide":"200"}' data-toggle="tooltip"
+          title="Indica cuantas tropas se pueden entrenar como maximo en el cuartel"
+          data-filter=".training_rate">training
+          rate</button>
         <button class="button" data-filter=".training_speed">training speed</button>
         <button class="button Disabled" data-filter=".training_cost">training cost</button>
       </div>
@@ -87,7 +88,7 @@
 
     </div>
 
-    <div id="bloque2">
+    <div id="bloque-botones-2" class="filters">
 
       <h4>Healing</h4>
       <div class="button-group" data-filter-group="battle">
@@ -118,11 +119,10 @@
 
     </div>
 
-
-    <div id="bloque-sorts">
+    <div id="bloque-botones-3">
 
       <h4>Sort</h4>
-      <div id="sorts" class="button-group">
+      <div class="sorts button-group">
         <button class="button is-checked" data-sort-by="original-order">original order</button>
         <button class="button" data-sort-by="name">name</button>
         <button class="button" data-sort-by="grade">grade</button>
@@ -130,11 +130,17 @@
 
     </div>
 
-    <div class="grid" id="contenedor">
+    <div id="bloque-botones-4">
+      <button class="button button--reset">Reset filters</button>
+    </div>
+  </div>
+
+
+  <div class="grid" id="contenedor">
 
 
 
-      <!-- 
+    <!-- 
       <div class="element-item normal boost" id="asd">
         <div class="gold protection reserves aljsldksajd laskjdlasjd lasjdlksdj ">0.1</div>
         <div class="protection reserves">0.1</div>
@@ -197,7 +203,7 @@
 
       </div>
       -->
-    </div>
+  </div>
 
 
 </body>
