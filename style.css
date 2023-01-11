@@ -279,3 +279,9 @@ li {
   background: #ffd472;
   font-weight: bold;
 }
+
+#github-link{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
