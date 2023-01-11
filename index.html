@@ -38,8 +38,6 @@
     <!-- <div style="display: flex; justify-content: space-between; width: 20rem;">
     </div> -->
 
-
-
     <div id="bloque-filtros">
       <h4>Resources:</h4>
       <div class="button-group" data-filter-group="resources">
@@ -90,37 +88,33 @@
         <button class="button Disabled" data-filter=".hospital_capacity">hospital capacity</button>
       </div>
 
-      
 
+      <h4>Various</h4>
+      <div class="button-group" data-filter-group="various">
+        <button class="button is-checked" data-filter="*">any</button>
+        <button class="button" data-filter=".construction_speed">construction speed</button>
+        <button class="button" data-filter=".research_speed">research speed</button>
+        <button class="button" data-filter=".action_point">action point</button>
+      </div>
 
+      <h4>Buff & Debuff</h4>
+      <div class="button-group" data-filter-group="buff_and_debuff">
+        <button class="button is-checked" data-filter="*">any</button>
+        <button class="button" data-filter=".buff, .debuff">both</button>
+        <button class="button" data-filter=".buff">only buffs</button>
+        <!-- aplica para el propio reino, se pueden ver en la esquina inferior derecha -->
+        <button class="button" data-filter=".debuff">only debuffs</button>
+        <!-- aplica para el enemigo, hay que hacer click en un castillo enemigo y luego en el rallito naranja -->
+      </div>
 
-
-        <h4>Various</h4>
-        <div class="button-group" data-filter-group="various">
-          <button class="button is-checked" data-filter="*">any</button>
-          <button class="button" data-filter=".construction_speed">construction speed</button>
-          <button class="button" data-filter=".research_speed">research speed</button>
-          <button class="button" data-filter=".action_point">action point</button>
-        </div>
-
-        <h4>Buff & Debuff</h4>
-        <div class="button-group" data-filter-group="buff_and_debuff">
-          <button class="button is-checked" data-filter="*">any</button>
-          <button class="button" data-filter=".buff, .debuff">both</button>
-          <button class="button" data-filter=".buff">only buffs</button>
-          <!-- aplica para el propio reino, se pueden ver en la esquina inferior derecha -->
-          <button class="button" data-filter=".debuff">only debuffs</button>
-          <!-- aplica para el enemigo, hay que hacer click en un castillo enemigo y luego en el rallito naranja -->
-        </div>
-
-        <h4>Grade</h4>
-        <div class="button-group" data-filter-group="grade">
-          <button class="button is-checked" data-filter="*">any</button>
-          <button class="button" data-filter=".legendary">legendary</button>
-          <button class="button" data-filter=".epic">epic</button>
-          <button class="button" data-filter=".magic">magic</button>
-          <button class="button" data-filter=".normal">normal</button>
-        </div>
+      <h4>Grade</h4>
+      <div class="button-group" data-filter-group="grade">
+        <button class="button is-checked" data-filter="*">any</button>
+        <button class="button" data-filter=".legendary">legendary</button>
+        <button class="button" data-filter=".epic">epic</button>
+        <button class="button" data-filter=".magic">magic</button>
+        <button class="button" data-filter=".normal">normal</button>
+      </div>
 
     </div>
 
@@ -133,7 +127,7 @@
         <button class="button" data-sort-by="name">name</button>
         <button class="button" data-sort-by="grade">grade</button>
       </div>
-      
+
     </div>
 
     <div class="grid" id="contenedor">
