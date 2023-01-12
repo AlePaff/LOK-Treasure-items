@@ -81,29 +81,7 @@ function isotopeCode() {
 
    // filter functions
    var filterFns = {
-      // show if grade is greater than 50
-      // numberGreaterThan50: function() {
-      // var grade = $(this).find('.grade').text();
-      // return parseInt( grade, 10 ) > 50;
-      // },
-      // show if name ends with -ium
-      ium: function () {
-         var name = $(this).find('.name').text();    //selecciona el elemento con clase name (tambien en todos los hijos anidados, ver find()) y obtiene su texto
-         return name.match(/ium$/);     //$ es el final de la cadena
-      },
-
-      speedSearch: function () {
-         //devolver el elemento que tenga la palabra "speed" en su clase hijo
-         var name = $(this).find('.research').text();    //busca las que tengan speed Y research (para otros ifs ver https://isotope.metafizzy.co/filtering.html)
-         // console.log(name);
-         return name;
-      },
-
-
-      // legendary: function() {
-      //    var grade = $(this).find('.grade').text();
-      //    return parseInt(grade, 10) == 4;
-      // }
+      // ver funciones de filtrado en https://isotope.metafizzy.co/filtering.html#functions
    };
 
    var filters = {};
@@ -113,23 +91,13 @@ function isotopeCode() {
    var $grid = $('.grid').isotope({     //selecciona el elemento con clase grid y le aplica el plugin isotope
       itemSelector: '.element-item',      //selecciona los elementos con clase element-item
       layoutMode: 'fitRows',        //ordena en filas
-      //sorts
+      //sorts (ver mas en https://isotope.metafizzy.co/sorting.html#getsortdata)
       getSortData: {
          name: function (itemElem) {     //desabilita case sensitive
             var name = $(itemElem).find('.name').text();
             return name.toLowerCase();
          },
-         grade: '.grade', // parseInt',
-         symbol: '.symbol',
-         category: '[data-category]',
-         weight: function (itemElem) {
-            var weight = $(itemElem).find('.weight').text();
-            return parseFloat(weight.replace(/[\(\)]/g, ''));
-         }
-         //ordenar tambien por la cantidad de palabras repetidas (aparece gold 5 veces en los filtros entonces esa primero. usar length )
-
-
-
+         grade: '.grade'
       },
       // filtros
       filter: function () {
@@ -212,33 +180,33 @@ function isotopeCode() {
 
 
    // ============= highlight tooltip =============   
-   var tooltip_original = "";
-   //toma cada filtro aplicado y remarca en el tooltip dicho filtro
-   $('.element-item').on("mouseenter", function () {
+   // var tooltip_original = "";
+   // //toma cada filtro aplicado y remarca en el tooltip dicho filtro
+   // $('.element-item').on("mouseenter", function () {
 
-      // busca la descripción que tenga el boton seleccionado
-      var item_tooltip = $(this).find('img[data-original-title]');
-      var texto_tooltip = item_tooltip.attr('data-original-title');
-      tooltip_original = texto_tooltip;     //para mantener una copia del texto original
+   //    // busca la descripción que tenga el boton seleccionado
+   //    var item_tooltip = $(this).find('img[data-original-title]');
+   //    var texto_tooltip = item_tooltip.attr('data-original-title');
+   //    tooltip_original = texto_tooltip;     //para mantener una copia del texto original
 
-      for (var prop in filters) {
-         var filtro = filters[prop];
-         if (filtro != '*') {      //ignorar cuando un boton está en "any"
-            //obtiene el nombre que se muestra en el boton actualmente seleccionado
-            var filter_name = $('.filters').find('button[data-filter="' + filtro + '"]').text();
-            var re = new RegExp(filter_name, "gi");    //g=global, i=insensitive
+   //    for (var prop in filters) {
+   //       var filtro = filters[prop];
+   //       if (filtro != '*') {      //ignorar cuando un boton está en "any"
+   //          //obtiene el nombre que se muestra en el boton actualmente seleccionado
+   //          var filter_name = $('.filters').find('button[data-filter="' + filtro + '"]').text();
+   //          var re = new RegExp(filter_name, "gi");    //g=global, i=insensitive
 
-            //reemplaza el nombre del boton en el tooltip por el mismo pero bold
-            texto_tooltip = texto_tooltip.replace(re, "<b>" + filter_name + "</b>");
-            item_tooltip.attr('data-original-title', texto_tooltip);
-         }
-      }
-   });
-   // resetear tooltip cuando salga el mouse del item
-   $('.element-item').on("mouseleave", function () {
-      var item_tooltip = $(this).find('img[data-original-title]');
-      item_tooltip.attr('data-original-title', tooltip_original);
-   });
+   //          //reemplaza el nombre del boton en el tooltip por el mismo pero bold
+   //          texto_tooltip = texto_tooltip.replace(re, "<b>" + filter_name + "</b>");
+   //          item_tooltip.attr('data-original-title', texto_tooltip);
+   //       }
+   //    }
+   // });
+   // // resetear tooltip cuando salga el mouse del item
+   // $('.element-item').on("mouseleave", function () {
+   //    var item_tooltip = $(this).find('img[data-original-title]');
+   //    item_tooltip.attr('data-original-title', tooltip_original);
+   // });
 
    
    // ========= Update =========
