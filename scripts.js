@@ -321,6 +321,7 @@ const promise2 = $.getJSON("data.json", function (datos) {
             if (trea[0].includes("research speed")) { trea[0] = trea[0].replace("research speed", "research_speed"); }
             if (trea[0].includes("healing speed")) { trea[0] = trea[0].replace("healing speed", "healing_speed"); }
             if (trea[0].includes("action point")) { trea[0] = trea[0].replace("action point", "action_point"); }
+            if (trea[0].includes("mortality reduction")) { trea[0] = trea[0].replace("mortality reduction", "mortality_reduction"); }
 
             // if(trea[0].includes("hospital capacity")){trea[0] = trea[0].replace("hospital capacity", "hospital_capacity");}
             if (trea[0].includes("construction speed")) { trea[0] = trea[0].replace("construction speed", "construction_speed"); }
@@ -380,10 +381,25 @@ const promise2 = $.getJSON("data.json", function (datos) {
       container.appendChild(element);
    }
 
+   // =========== tooltip de los botones =============
+   descripcion_botones(".training_rate", "Indica cuantas tropas se pueden entrenar como maximo en el cuartel");
+   descripcion_botones(".training_cost", "No disponible en ninguno de los items");
+   descripcion_botones(".mortality_reduction", "No disponible en ninguno de los items");
+   descripcion_botones(".hospital_capacity", "No disponible en ninguno de los items");
+   descripcion_botones(".buff", "aplica para el propio reino, se pueden ver en la esquina inferior derecha del juego");
+   descripcion_botones(".debuff", "aplica para el enemigo, hay que hacer click en un castillo enemigo y luego en el rallito naranja");
+
+
    // una vez cargados los datos del json, se ejecuta el código de isotope
 });
 
 
+function descripcion_botones(selector, descripcion) {
+   var boton = $("#buttons-container").find('button[data-filter="' + selector + '"]');
+   boton.attr("data-delay", '{"show":"2000", "hide":"200"}');
+   boton.attr("title", descripcion);
+   boton.attr("data-toggle", "tooltip");
+}
 
 Promise.all([promise1, promise2]).then((values) => {
    isotopeCode();
