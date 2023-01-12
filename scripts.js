@@ -214,10 +214,9 @@ function isotopeCode() {
    // ============= highlight tooltip =============   
    $(".switch").on("change", function () {
       //solo se resaltará si está indicado con el switch
+      var tooltip_original = "";
       if ($(this).prop('checked')) {
-
-         console.log("ASD");
-         var tooltip_original = "";
+         
          //toma cada filtro aplicado y remarca en el tooltip dicho filtro
          $('.element-item').on("mouseenter", function () {
 
@@ -245,7 +244,10 @@ function isotopeCode() {
             item_tooltip.attr('data-original-title', tooltip_original);
          });
 
-      };
+      } else {
+         var item_tooltip = $(this).find('img[data-original-title]');
+         item_tooltip.attr('data-original-title', tooltip_original);
+      }
    });
    // ========= Update =========
    // change is-checked class on buttons
