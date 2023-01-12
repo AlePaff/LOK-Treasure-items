@@ -12,4 +12,4 @@ Si encuentras algún bug o alguna feature que te gustaría puedes levantar un is
 
 * Para ver todos los powerups, boosts y estadisticas que se estan aplicando ahora mismo se puede ir a "Castle" y ahí tocar el icono del castillo
 
-    ![click en castillo](https://i.imgur.com/PUikuRl.png)
+    ![click en castillo](https://i.imgur.com/1bxxsxX.png)
