@@ -210,45 +210,37 @@ function isotopeCode() {
       $defaultCheck.addClass('is-checked');
    });
 
-   
+
    // ============= highlight tooltip =============   
-   $(".switch").on("change", function () {
-      //solo se resaltará si está indicado con el switch
-      var tooltip_original = "";
-      if ($(this).prop('checked')) {
-         
-         //toma cada filtro aplicado y remarca en el tooltip dicho filtro
-         $('.element-item').on("mouseenter", function () {
+   var tooltip_original = "";
+   //toma cada filtro aplicado y remarca en el tooltip dicho filtro
+   $('.element-item').on("mouseenter", function () {
 
-            // busca la descripción que tenga el boton seleccionado
-            var item_tooltip = $(this).find('img[data-original-title]');
-            var texto_tooltip = item_tooltip.attr('data-original-title');
-            tooltip_original = texto_tooltip;     //para mantener una copia del texto original
+      // busca la descripción que tenga el boton seleccionado
+      var item_tooltip = $(this).find('img[data-original-title]');
+      var texto_tooltip = item_tooltip.attr('data-original-title');
+      tooltip_original = texto_tooltip;     //para mantener una copia del texto original
 
-            for (var prop in filters) {
-               var filtro = filters[prop];
-               if (filtro != '*') {      //ignorar cuando un boton está en "any"
-                  //obtiene el nombre que se muestra en el boton actualmente seleccionado
-                  var filter_name = $('.filters').find('button[data-filter="' + filtro + '"]').text();
-                  var re = new RegExp(filter_name, "gi");    //g=global, i=insensitive
+      for (var prop in filters) {
+         var filtro = filters[prop];
+         if (filtro != '*') {      //ignorar cuando un boton está en "any"
+            //obtiene el nombre que se muestra en el boton actualmente seleccionado
+            var filter_name = $('.filters').find('button[data-filter="' + filtro + '"]').text();
+            var re = new RegExp(filter_name, "gi");    //g=global, i=insensitive
 
-                  //reemplaza el nombre del boton en el tooltip por el mismo pero bold
-                  texto_tooltip = texto_tooltip.replace(re, "<b>" + filter_name + "</b>");
-                  item_tooltip.attr('data-original-title', texto_tooltip);
-               }
-            }
-         });
-         // resetear tooltip cuando salga el mouse del item
-         $('.element-item').on("mouseleave", function () {
-            var item_tooltip = $(this).find('img[data-original-title]');
-            item_tooltip.attr('data-original-title', tooltip_original);
-         });
-
-      } else {
-         var item_tooltip = $(this).find('img[data-original-title]');
-         item_tooltip.attr('data-original-title', tooltip_original);
+            //reemplaza el nombre del boton en el tooltip por el mismo pero bold
+            texto_tooltip = texto_tooltip.replace(re, "<b>" + filter_name + "</b>");
+            item_tooltip.attr('data-original-title', texto_tooltip);
+         }
       }
    });
+   // resetear tooltip cuando salga el mouse del item
+   $('.element-item').on("mouseleave", function () {
+      var item_tooltip = $(this).find('img[data-original-title]');
+      item_tooltip.attr('data-original-title', tooltip_original);
+   });
+
+   
    // ========= Update =========
    // change is-checked class on buttons
    $('.button-group').each(function (i, buttonGroup) {    //selecciona cada elemento con clase button-group
