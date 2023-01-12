@@ -127,6 +127,9 @@ function isotopeCode() {
             return parseFloat(weight.replace(/[\(\)]/g, ''));
          }
          //ordenar tambien por la cantidad de palabras repetidas (aparece gold 5 veces en los filtros entonces esa primero. usar length )
+         
+
+
       },
       // filtros
       filter: function () {
@@ -386,9 +389,8 @@ const promise2 = $.getJSON("data.json", function (datos) {
    descripcion_botones(".training_cost", "No disponible en ninguno de los items");
    descripcion_botones(".mortality_reduction", "No disponible en ninguno de los items");
    descripcion_botones(".hospital_capacity", "No disponible en ninguno de los items");
-   descripcion_botones(".buff", "aplica para el propio reino, se pueden ver en la esquina inferior derecha del juego");
-   descripcion_botones(".debuff", "aplica para el enemigo, hay que hacer click en un castillo enemigo y luego en el rallito naranja");
-
+   descripcion_botones(".buff", "aplica para el propio reino, se pueden ver en la esquina inferior derecha del juego, presionando el icono del rayo");
+   descripcion_botones(".debuff", "aplica para el enemigo, hay que hacer click en un castillo enemigo y luego en el rayo naranja que aparece debajo");
 
    // una vez cargados los datos del json, se ejecuta el código de isotope
 });
