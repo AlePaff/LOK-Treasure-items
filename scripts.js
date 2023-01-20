@@ -307,6 +307,7 @@ const promise2 = $.getJSON("data.json", function (datos) {
       //       console.log(treasure_boost_and_master_bonus["treasure_ab"+(j+1)][0]);
       //    }
       // }
+      // console.log("========");
 
 
       // === Cambio de nombres, filtros y parseo ===
@@ -395,7 +396,7 @@ const promise2 = $.getJSON("data.json", function (datos) {
 
 function descripcion_botones(selector, descripcion) {
    var boton = $("#buttons-container").find('button[data-filter="' + selector + '"]');
-   boton.attr("data-delay", '{"show":"2000", "hide":"200"}');
+   boton.attr("data-delay", '{"show":"2000", "hide":"50"}');
    boton.attr("title", descripcion);
    boton.attr("data-toggle", "tooltip");
 }
