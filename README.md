@@ -1,7 +1,7 @@
 # LOK-Treasure-items
 Se utilizó la librería [Isotope](https://isotope.metafizzy.co/), y los datos fueron obtenidos del juego
 
-Si encuentras algún bug o alguna feature que te gustaría puedes levantar un issue o hacer un fork del repositorio
+Si encuentras algún bug o alguna feature que te gustaría agregar puedes crear un issue o si sabes programar crear un pull request
 
 ## <u>Tips:</u>
 * Para cambiar rapidamente los tesoros sin tener que ir a la "Treasure House", se puede desde el icono del Usuario -> Treasures, de esta forma se puede cambiar tanto desde el reino (kingdom) como desde el campo de batalla (field)

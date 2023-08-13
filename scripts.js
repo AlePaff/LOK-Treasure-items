@@ -68,6 +68,10 @@ function grade_to_string(grade) {
       return "epic";
    } else if (grade == 4) {
       return "legendary";
+   } else if (grade == 5) {
+      return "myth";
+   } else {
+      return "not defined"
    }
 }
 
@@ -323,9 +327,10 @@ const promise2 = $.getJSON("data.json", function (datos) {
             if (trea[0].includes("healing speed")) { trea[0] = trea[0].replace("healing speed", "healing_speed"); }
             if (trea[0].includes("action point")) { trea[0] = trea[0].replace("action point", "action_point"); }
             if (trea[0].includes("mortality reduction")) { trea[0] = trea[0].replace("mortality reduction", "mortality_reduction"); }
-
-            // if(trea[0].includes("hospital capacity")){trea[0] = trea[0].replace("hospital capacity", "hospital_capacity");}
+            if (trea[0].includes("marching troop capacity")) { trea[0] = trea[0].replace("marching troop capacity", "marching_troop_capacity"); }
+            if(trea[0].includes("hospital capacity")){trea[0] = trea[0].replace("hospital capacity", "hospital_capacity");}
             if (trea[0].includes("construction speed")) { trea[0] = trea[0].replace("construction speed", "construction_speed"); }
+            //TODO: Hardcodeado, cambiar por algo mas bonito
          }
       }
 
@@ -340,6 +345,7 @@ const promise2 = $.getJSON("data.json", function (datos) {
       element.className += (tiene_debuff ? " debuff" : "") + (tiene_buff ? " buff" : "");
 
       var language = "English";
+      // TODO: Permitir cambiar desde la pagina el idioma
 
       // crea la imagen del item
       var img = document.createElement("img");
@@ -384,8 +390,6 @@ const promise2 = $.getJSON("data.json", function (datos) {
 
    // =========== tooltip de los botones =============
    descripcion_botones(".training_rate", "Indica cuantas tropas se pueden entrenar como maximo en el cuartel");
-   descripcion_botones(".training_cost", "No disponible en ninguno de los items");
-   descripcion_botones(".mortality_reduction", "No disponible en ninguno de los items");
    descripcion_botones(".hospital_capacity", "No disponible en ninguno de los items");
    descripcion_botones(".buff", "aplica para el propio reino, se pueden ver en la esquina inferior derecha del juego, presionando el icono del rayo 🗲");
    descripcion_botones(".debuff", "aplica para el enemigo, hay que hacer click en un castillo enemigo y luego en el rayo naranja 🗲 que aparece debajo");

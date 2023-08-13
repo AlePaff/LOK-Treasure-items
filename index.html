@@ -15,7 +15,8 @@
 
   <meta charset="utf-8">
   <title>LOK Treasure-Items</title>
-  <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg" />
+  <!-- <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg" /> -->
+  <link rel="icon" href="../sprites/icon_10502001.png" type="image/png"/>
 
   <!-- fuentes de google fonts -->
   <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
@@ -89,13 +90,16 @@
       </div>
       <div class="button-group" data-filter-group="battle_specific">
         <button class="button is-checked" data-filter="*">any</button>
-        <button class="button" data-filter=".speed">speed</button>
-        <button class="button" data-filter=".hp">hp</button>
+        <button class="button" data-filter=".attack">attack</button>
         <button class="button" data-filter=".defense">defense</button>
+        <button class="button" data-filter=".hp">hp</button>
+        <button class="button" data-filter=".speed">speed</button>
         <button class="button" data-filter=".load">load</button>
         <button class="button" data-filter=".training_rate">training rate</button>
         <button class="button" data-filter=".training_speed">training speed</button>
-        <button class="button Disabled" data-filter=".training_cost">training cost</button>
+        <button class="button" data-filter=".training_cost">training cost</button>
+        <button class="button" data-filter=".marching_troop_capacity">marching troop capacity</button>
+        <button class="button" data-filter=".rally">rally</button>
       </div>
 
       <h4>Various</h4>
@@ -114,8 +118,8 @@
       <div class="button-group" data-filter-group="battle">
         <button class="button is-checked" data-filter="*">any</button>
         <button class="button" data-filter=".healing_speed">healing speed</button>
-        <button class="button Disabled" data-filter=".mortality_reduction">mortality reduction</button>
-        <button class="button Disabled" data-filter=".hospital_capacity">hospital capacity</button>
+        <button class="button" data-filter=".mortality_reduction">mortality reduction</button>
+        <button class="button" data-filter=".hospital_capacity">hospital capacity</button>
       </div>
 
       <h4>Buff & Debuff</h4>
@@ -136,6 +140,7 @@
       <h4>Grade</h4>
       <div class="button-group" data-filter-group="grade">
         <button class="button is-checked" data-filter="*">any</button>
+        <button class="button" data-filter=".myth">mythic</button>
         <button class="button" data-filter=".legendary">legendary</button>
         <button class="button" data-filter=".epic">epic</button>
         <button class="button" data-filter=".magic">magic</button>
